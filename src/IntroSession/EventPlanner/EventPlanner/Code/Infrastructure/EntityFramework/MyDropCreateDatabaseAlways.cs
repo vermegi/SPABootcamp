@@ -1,4 +1,14 @@
-﻿using System.Data.Entity;
+﻿using System.Configuration;
+using System.Data.Entity;
+using System.Data.SQLite;
+using System.Diagnostics;
+using FluentMigrator.Runner;
+using FluentMigrator.Runner.Announcers;
+using FluentMigrator.Runner.Generators.SQLite;
+using FluentMigrator.Runner.Initialization;
+using FluentMigrator.Runner.Initialization.AssemblyLoader;
+using FluentMigrator.Runner.Processors;
+using FluentMigrator.Runner.Processors.SQLite;
 
 namespace EventPlanner.Code.Infrastructure.EntityFramework
 {
@@ -11,12 +21,26 @@ namespace EventPlanner.Code.Infrastructure.EntityFramework
         /// <param name="context">The context.</param>
         public virtual void InitializeDatabase(TContext context)
         {
-            context.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction,
-                string.Format("ALTER DATABASE {0} SET SINGLE_USER WITH ROLLBACK IMMEDIATE",
-                    context.Database.Connection.Database));
+            SQLiteConnection.CreateFile("c:\\temp\\Evenementen.sqlite");
+            using (var connection = new SQLiteConnection(ConfigurationManager.ConnectionStrings["evenementEntities"].ConnectionString))
+            {
+                
+                var consoleAnnouncer = new TextWriterAnnouncer(s => Debug.WriteLine(s))
+                {
+                    ShowElapsedTime = false,
+                    ShowSql = true
+                };
 
-            context.Database.Delete();
-            context.Database.Create();
+                var assemblyLoader = new AssemblyLoaderFactory();
+                var assembly = assemblyLoader.GetAssemblyLoader("EventPlanner.Migrations").Load();
+
+                var runner = new MigrationRunner(assembly, new RunnerContext(consoleAnnouncer),
+                    new SQLiteProcessor(connection, new SQLiteGenerator(), consoleAnnouncer, new ProcessorOptions(),
+                        new SQLiteDbFactory()));
+
+                runner.MigrateUp();
+            }
+
             this.Seed(context);
             context.SaveChanges();
         }

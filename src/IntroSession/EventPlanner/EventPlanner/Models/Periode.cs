@@ -8,19 +8,14 @@ namespace EventPlanner.Models
     public class Periode
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Column("id")]
         public int Id { get; set; }
 
-        [Column("vergunningid")]
-        public int VergunningId { get; set; }
+        public int EvenementId { get; set; }
 
-        [Column("beginperiode", TypeName = "date")]
         public DateTime BeginPeriode { get; set; }
 
-        [Column("eindeperiode", TypeName = "date")]
         public DateTime EindePeriode { get; set; }
 
-        [Column("opmerking", TypeName = "text")]
         public string Opmerking { get; set; }
 
         public Evenement Evenement { get; set; }

@@ -27,7 +27,7 @@ namespace EventPlanner.Models
             modelBuilder.Entity<Evenement>()
                 .HasMany<Periode>(v => v.Periodes)
                 .WithRequired(p => p.Evenement)
-                .HasForeignKey(p => p.VergunningId);
+                .HasForeignKey(p => p.EvenementId);
 
             modelBuilder.Entity<Periode>()
                 .HasMany(p => p.Dagen)

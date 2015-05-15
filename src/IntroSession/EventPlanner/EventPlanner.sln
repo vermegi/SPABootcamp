@@ -12,6 +12,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{73A9C9
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventPlanner.Migrations", "EventPlanner.Migrations\EventPlanner.Migrations.csproj", "{7ADE291F-B944-47F1-9F74-1CFD1AA69899}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -22,6 +24,10 @@ Global
 		{1444F857-57F2-4030-8969-70D90F9A1D1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1444F857-57F2-4030-8969-70D90F9A1D1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1444F857-57F2-4030-8969-70D90F9A1D1A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7ADE291F-B944-47F1-9F74-1CFD1AA69899}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7ADE291F-B944-47F1-9F74-1CFD1AA69899}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7ADE291F-B944-47F1-9F74-1CFD1AA69899}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7ADE291F-B944-47F1-9F74-1CFD1AA69899}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

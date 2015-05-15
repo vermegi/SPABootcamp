@@ -77,15 +77,15 @@ namespace EventPlanner.Models
                 {
                     new Dag
                     {
-                        Beginuur = new TimeSpan(9, 0, 0),
-                        Einduur = new TimeSpan(16, 0, 0),
+                        Beginuur = new TimeSpan(9, 0, 0).ToString(),
+                        Einduur = new TimeSpan(16, 0, 0).ToString(),
                         Datum = date,
                         Opmerking = LoremIpsum(1, 3)
                     },
                     new Dag
                     {
-                        Beginuur = new TimeSpan(9, 0, 0),
-                        Einduur = new TimeSpan(16, 0, 0),
+                        Beginuur = new TimeSpan(9, 0, 0).ToString(),
+                        Einduur = new TimeSpan(16, 0, 0).ToString(),
                         Datum = date.AddDays(2),
                         Opmerking = LoremIpsum(1, 3)
                     },

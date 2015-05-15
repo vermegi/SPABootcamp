@@ -32,7 +32,7 @@ namespace EventPlanner.Controllers
                         (d, p) => new { Dag = d, Periode = p })
                     .Join(
                         ctx.Evenementen,
-                        dp => dp.Periode.VergunningId,
+                        dp => dp.Periode.EvenementId,
                         v => v.Id,
                         (dp, v) => new { Dag = dp.Dag, Periode = dp.Periode, Vergunning = v, Straten = dp.Periode.Straten })
                     .ToList();
