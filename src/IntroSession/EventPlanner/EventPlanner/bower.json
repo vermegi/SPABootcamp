@@ -1,0 +1,23 @@
+{
+    "name": "EventPlanner",
+    "version": "1.0.0",
+    "homepage": "https://github.com/vermegi/SPABootcamp",
+    "authors": [
+        "vermegi <gitte.vermeiren@gmail.com>"
+    ],
+    "description": "Eventplanner application, example app for Angular",
+    "keywords": [
+        "angular"
+    ],
+    "license": "MIT",
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "test",
+        "tests"
+    ],
+    "dependencies": {
+        "bootstrap": "~3.3.4"
+    }
+}
