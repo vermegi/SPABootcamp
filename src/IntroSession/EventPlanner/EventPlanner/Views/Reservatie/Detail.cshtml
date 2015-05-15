@@ -1,0 +1,54 @@
+﻿@model EventPlanner.Contracts.EvenementWithMessage
+
+@{
+    ViewBag.Title = "Evenement detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Evenement detail</h2>
+<div class="well">
+    @using (Html.BeginForm("OmschrijvingAanpassen", "Reservatie", FormMethod.Post))
+    {
+        @Html.Hidden("Id", Model.Evenement.Id)
+        <div class="form-group">
+            <label>Eigenaar: </label>
+            @Model.Evenement.Eigenaar
+        </div>
+        <div class="form-group">
+            <label>Omschrijving:</label>
+            @Html.TextArea("Omschrijving", Model.Evenement.Omschrijving, new Dictionary<string, object> { { "class", "form-control" }, { "rows", "10" } })
+        </div>
+
+        <div class="form-group">
+                @Html.CheckBox("Muziek", Model.Evenement.MuziekVergunning.GetValueOrDefault())
+                <span>Muziek?</span>
+        </div>
+        <button type="submit" class="btn btn-success">Omschrijving opslaan</button>            
+    }
+</div>
+
+@section scripts
+{
+    <script type="text/javascript">
+        toastr.options = {
+            "closeButton": false,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": false,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        };
+        var message = "@Model.Message";
+        if (message != "")
+            toastr["success"]("@Model.Message", "");
+    </script>
+}

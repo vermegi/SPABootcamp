@@ -34,8 +34,6 @@
             column.For(c => c.Evenement.Omschrijving);
             column.For(c => c.Straten.ToKommaSeparatedString()).Named("Straten");
             column.For(c => c.Evenement.Eigenaar);
-            //column.For(c => c.Reservatie.);
-            //column.For(c => c.Reservatie.DatumEinde);
             column.For(c => c.Evenement.DatumBeslissing);
             column.For(c => c.Reservatiedatum);
             column.For(c => Html.ActionLink("Detail", "Detail", "Reservatie", new { Id = c.Evenement.Id }, new { Id = c.Evenement.Id }));
