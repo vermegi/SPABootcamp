@@ -1,6 +1,9 @@
-﻿using System.Web;
+﻿using System.Data.Entity;
+using System.Data.SqlClient;
+using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using EventPlanner.Models;
 
 namespace EventPlanner
 {
@@ -10,6 +13,9 @@ namespace EventPlanner
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+
+            SqlConnection.ClearAllPools();
+            Database.SetInitializer(new EvenementEntitiesInitializer());
         }
     }
 }

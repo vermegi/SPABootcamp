@@ -11,6 +11,10 @@ namespace EventPlanner.Code.Infrastructure.EntityFramework
         /// <param name="context">The context.</param>
         public virtual void InitializeDatabase(TContext context)
         {
+            context.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction,
+                string.Format("ALTER DATABASE {0} SET SINGLE_USER WITH ROLLBACK IMMEDIATE",
+                    context.Database.Connection.Database));
+
             context.Database.Delete();
             context.Database.Create();
             this.Seed(context);

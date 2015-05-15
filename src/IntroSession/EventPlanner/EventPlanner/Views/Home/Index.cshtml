@@ -1,0 +1,29 @@
+﻿@using EventPlanner.Code.Extensions
+@using MvcContrib.UI.Grid
+@model IEnumerable<EventPlanner.Contracts.ReservatieResdata>
+
+@{
+    ViewBag.Title = "Evenementen QFrame";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Komende Evenementen</h2>
+
+@using (Html.BeginForm("PeriodeList", "Home", FormMethod.Post))
+{
+    @Html.TextBox("DatumVan", DateTime.Now.Date.ToShortDateString())
+    @Html.TextBox("DatumTot", DateTime.Now.AddMonths(4).Date.ToShortDateString())
+    <input type="submit" value="Periode aanpassen" />
+}
+
+@Html.Grid(Model).Attributes(new Dictionary<string, object> { { "id", "ReservatieTable" } }).Columns(column =>
+{
+    column.For(c => c.Evenement.Omschrijving);
+    column.For(c => c.Straten.ToKommaSeparatedString()).Named("Straten");
+    column.For(c => c.Evenement.Eigenaar);
+    //column.For(c => c.Reservatie.);
+    //column.For(c => c.Reservatie.DatumEinde);
+    column.For(c => c.Evenement.DatumBeslissing);
+    column.For(c => c.Reservatiedatum);
+    column.For(c => Html.ActionLink("Detail", "Detail", "Reservatie", new { Id = c.Evenement.Id }, new { Id = c.Evenement.Id }));
+})

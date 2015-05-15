@@ -5,18 +5,9 @@ using EventPlanner.Code.Infrastructure.EntityFramework;
 
 namespace EventPlanner.Models
 {
-    public class VergunEntitiesInitializer : MyDropCreateDatabaseAlways<EvenementEntities>
+    public class EvenementEntitiesInitializer : MyDropCreateDatabaseAlways<EvenementEntities>
     {
         private static Random _rnd;
-
-        public override void InitializeDatabase(EvenementEntities context)
-        {
-            context.Database.ExecuteSqlCommand(
-                string.Format("ALTER DATABASE {0} SET SINGLE_USER WITH ROLLBACK IMMEDIATE",
-                    context.Database.Connection.Database));
-
-            base.InitializeDatabase(context);
-        }
 
         protected override void Seed(EvenementEntities context)
         {
