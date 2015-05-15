@@ -1,4 +1,6 @@
-﻿using EventPlanner.Models;
+﻿using System;
+using System.Collections.Generic;
+using EventPlanner.Models;
 
 namespace EventPlanner.Contracts
 {
@@ -6,5 +8,6 @@ namespace EventPlanner.Contracts
     {
         public Evenement Evenement { get; set; }
         public string Message { get; set; }
+        public IEnumerable<DateTime> ReservatieData { get; set; }
     }
 }
