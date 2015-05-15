@@ -9,8 +9,13 @@ To get started, please install the following:
 
 npm install -g bower
 
-After cloning this repository to your desktop issue th following commands:
+* Gulp:
+
+npm install -g gulp
+
+After cloning this repository to your desktop issue the following commands:
 
 bower install
+gulp
 
-
+This should do it
