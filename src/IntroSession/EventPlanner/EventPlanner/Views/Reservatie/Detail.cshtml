@@ -5,8 +5,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Evenement detail</h2>
+<h1>@Model.Evenement.Titel</h1>
 <div class="well">
+    <h2>Detail</h2>
     @using (Html.BeginForm("OmschrijvingAanpassen", "Reservatie", FormMethod.Post))
     {
         @Html.Hidden("Id", Model.Evenement.Id)
@@ -20,11 +21,21 @@
         </div>
 
         <div class="form-group">
-                @Html.CheckBox("Muziek", Model.Evenement.MuziekVergunning.GetValueOrDefault())
-                <span>Muziek?</span>
+            @Html.CheckBox("Muziek", Model.Evenement.MuziekVergunning.GetValueOrDefault())
+            <span>Muziek?</span>
         </div>
         <button type="submit" class="btn btn-success">Omschrijving opslaan</button>            
     }
+</div>
+
+<div class="well">
+    <h2>Dagen</h2>
+    <ul>
+        @foreach (var reservatiedatum in Model.ReservatieData)
+        {
+            <li>@reservatiedatum.ToShortDateString()</li>
+        }
+    </ul>
 </div>
 
 @section scripts

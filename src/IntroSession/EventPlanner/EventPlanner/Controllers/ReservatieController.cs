@@ -15,7 +15,8 @@ namespace EventPlanner.Controllers
                                   where e.Id == Id
                                   select new EvenementWithMessage
                                   {
-                                      Evenement = e
+                                      Evenement = e,
+                                      ReservatieData = e.Periodes.SelectMany(p => p.Dagen).Select(d => d.Datum)
                                   }).SingleOrDefault();
 
                 if (evenement == null)
