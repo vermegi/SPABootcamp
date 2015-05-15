@@ -38,6 +38,24 @@
     </ul>
 </div>
 
+<div class="well">
+    @*TODO: eerst overlap ophalen voordat een periode opgeslagen wordt*@
+
+    @using (Html.BeginForm("PeriodeToevoegen", "Reservatie", FormMethod.Post)) 
+    {
+        @Html.Hidden("Id", Model.Evenement.Id)
+        <div class="form-group">
+            <label>Van:</label>
+            @Html.TextBox("BeginDatumPeriode","", new Dictionary<string, object> { { "class", "form-control" }})
+        </div>
+        <div class="form-group">
+            <label>Tot:</label>
+            @Html.TextBox("EindDatumPeriode","", new Dictionary<string, object> { { "class", "form-control" } })
+        </div>
+        <button type="submit" class="btn btn-success">Periode toevoegen</button>
+    }
+</div>
+
 @section scripts
 {
     <script type="text/javascript">
