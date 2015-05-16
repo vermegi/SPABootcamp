@@ -36,10 +36,12 @@ namespace EventPlanner.Controllers
                 var evenement = (from e in ctx.Evenementen
                                   where e.Id == command.Id
                                   select e).Single();
+                var reservatieData =
+                    ctx.Periodes.Where(p => p.EvenementId == evenement.Id).SelectMany(p => p.Dagen).Select(d => d.Datum).ToList();
 
                 if (!ModelState.IsValid)
                 {
-                    return View("detail", new EvenementWithMessage { Evenement = evenement, Message = "'t is nie just" });
+                    return View("detail", new EvenementWithMessage { Evenement = evenement, ReservatieData = reservatieData, Message = "'t is nie just" });
                 }
 
                 evenement.Omschrijving = command.Omschrijving;
@@ -47,7 +49,7 @@ namespace EventPlanner.Controllers
 
                 ctx.SaveChanges();
 
-                return View("detail", new EvenementWithMessage { Evenement = evenement, Message = "De wijzigingen werden succesvol opgeslagen" });
+                return View("detail", new EvenementWithMessage { Evenement = evenement, ReservatieData = reservatieData, Message = "De wijzigingen werden succesvol opgeslagen" });
             }
         }
 
