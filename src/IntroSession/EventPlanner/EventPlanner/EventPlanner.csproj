@@ -110,6 +110,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\lib\angular\angular.js" />
     <Content Include="Content\lib\bootstrap\css\bootstrap-theme.css" />
     <Content Include="Content\lib\bootstrap\css\bootstrap-theme.min.css" />
     <Content Include="Content\lib\bootstrap\css\bootstrap.css" />
@@ -165,15 +166,15 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="bower.json" />
     <Content Include="package.json" />
+    <Content Include="Views\Reservatie\Detail.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
     <Content Include="Content\lib\bootstrap\css\bootstrap-theme.css.map" />
     <Content Include="Content\lib\bootstrap\css\bootstrap.css.map" />
     <Content Include="Content\lib\bootstrap\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\lib\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\lib\bootstrap\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\lib\jquery\jquery.min.map" />
-    <Content Include="Views\Reservatie\Detail.cshtml" />
     <Content Include="Content\lib\toastr\toastr.scss" />
-    <Content Include="Views\Home\About.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
