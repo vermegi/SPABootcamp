@@ -173,6 +173,7 @@
     <Content Include="Content\lib\jquery\jquery.min.map" />
     <Content Include="Views\Reservatie\Detail.cshtml" />
     <Content Include="Content\lib\toastr\toastr.scss" />
+    <Content Include="Views\Home\About.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

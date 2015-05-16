@@ -52,6 +52,24 @@
             <label>Tot:</label>
             @Html.TextBox("EindDatumPeriode","", new Dictionary<string, object> { { "class", "form-control" } })
         </div>
+        <div class="form-group">
+            <p class="input-group">
+                <input class="form-control" type="text" placeholder="zoek een straat" />
+                <span class="input-group-btn">
+                    <button class="btn btn-default"><i class="glyphicon glyphicon-plus"></i></button>
+                </span>
+            </p>
+        </div>
+        <div>
+            <div><label for="Alle_Dagen"><input type="checkbox" name="Alle_Dagen" /> Alle dagen</label></div>
+            <div><label for="Maandag"><input type="checkbox" name="Maandag" /> Maandag</label></div>
+            <div><label for="Dinsdag"><input type="checkbox" name="Dinsdag" /> Dinsdag</label></div>
+            <div><label for="Woensdag"><input type="checkbox" name="Woensdag" /> Woensdag</label></div>
+            <div><label for="Donderdag"><input type="checkbox" name="Donderdag" /> Donderdag</label></div>
+            <div><label for="Vrijdag"><input type="checkbox" name="Vrijdag" /> Vrijdag</label></div>
+            <div><label for="Zaterdag"><input type="checkbox" name="Zaterdag" /> Zaterdag</label></div>
+            <div><label for="Zondag"><input type="checkbox" name="Zondag" /> Zondag</label></div>
+        </div>
         <button type="submit" class="btn btn-success">Periode toevoegen</button>
     }
 </div>
