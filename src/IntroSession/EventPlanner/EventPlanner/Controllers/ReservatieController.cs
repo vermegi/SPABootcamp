@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Text;
 using System.Web.Mvc;
 using EventPlanner.Code.Extensions;
 using EventPlanner.Contracts;
@@ -12,23 +14,10 @@ namespace EventPlanner.Controllers
     {
         public ActionResult Detail(int Id)
         {
-            using (var ctx = new EvenementEntities())
-            {
-                var evenement = (from e in ctx.Evenementen
-                                  where e.Id == Id
-                                  select new EvenementWithMessage
-                                  {
-                                      Evenement = e,
-                                      ReservatieData = e.Periodes.SelectMany(p => p.Dagen).Select(d => d.Datum)
-                                  }).SingleOrDefault();
-
-                if (evenement == null)
-                    evenement = new EvenementWithMessage();
-
-                return View(evenement);
-            }
+            return View(Id);
         }
 
+        [HttpPost]
         public ActionResult OmschrijvingAanpassen(BasisDataReservatieAanpassenCommand command)
         {
             using (var ctx = new EvenementEntities())
@@ -41,15 +30,15 @@ namespace EventPlanner.Controllers
 
                 if (!ModelState.IsValid)
                 {
-                    return View("detail", new EvenementWithMessage { Evenement = evenement, ReservatieData = reservatieData, Message = "'t is nie just" });
+                    return new HttpStatusCodeResult(HttpStatusCode.NotAcceptable);
                 }
 
                 evenement.Omschrijving = command.Omschrijving;
-                evenement.MuziekVergunning = command.Muziek;
+                evenement.MuziekVergunning = command.MuziekVergunning;
 
                 ctx.SaveChanges();
 
-                return View("detail", new EvenementWithMessage { Evenement = evenement, ReservatieData = reservatieData, Message = "De wijzigingen werden succesvol opgeslagen" });
+                return new HttpStatusCodeResult(HttpStatusCode.Accepted);
             }
         }
 
@@ -124,11 +113,11 @@ namespace EventPlanner.Controllers
                                   select new EvenementDetail
                                   {
                                       Evenement = r,
-                                      ReservatieData = r.Periodes.SelectMany<Periode, DateTime>(p => p.Dagen.Select(d => d.Datum))
+                                      ReservatieData = r.Periodes.SelectMany(p => p.Dagen.Select(d => d.Datum))
 
                                   }).SingleOrDefault();
 
-                return Json(reservatie, JsonRequestBehavior.AllowGet);
+                return reservatie.ToJsonResult();
             }
         }
     }

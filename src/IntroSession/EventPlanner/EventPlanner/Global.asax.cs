@@ -4,6 +4,8 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using EventPlanner.Models;
+using Microsoft.Web.Mvc;
+using JsonValueProviderFactory = Microsoft.Web.Mvc.JsonValueProviderFactory;
 
 namespace EventPlanner
 {
@@ -15,7 +17,7 @@ namespace EventPlanner
             RouteConfig.RegisterRoutes(RouteTable.Routes);
 
             SqlConnection.ClearAllPools();
-            Database.SetInitializer(new EvenementEntitiesInitializer());
+            Database.SetInitializer(new EvenementEntitiesInitializer());       
         }
     }
 }
