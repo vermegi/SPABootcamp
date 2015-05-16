@@ -5,37 +5,33 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>@Model.Evenement.Titel</h1>
-<div class="well">
-    <h2>Detail</h2>
-    @using (Html.BeginForm("OmschrijvingAanpassen", "Reservatie", FormMethod.Post))
-    {
-        @Html.Hidden("Id", Model.Evenement.Id)
+<div ng-controller="detailEvenementCtrl">
+    <h1>{{evenement.titel}}</h1>
+    <div class="well">
+        <h2>Detail</h2>
+        <input type="hidden" ng-model="evenement.id"/>
         <div class="form-group">
             <label>Eigenaar: </label>
-            @Model.Evenement.Eigenaar
+            {{evenement.eigenaar}}
         </div>
         <div class="form-group">
             <label>Omschrijving:</label>
-            @Html.TextArea("Omschrijving", Model.Evenement.Omschrijving, new Dictionary<string, object> { { "class", "form-control" }, { "rows", "10" } })
+            <textarea class="form-control" rows="10">{{evenement.omschrijving}}</textarea>
         </div>
 
         <div class="form-group">
-            @Html.CheckBox("Muziek", Model.Evenement.MuziekVergunning.GetValueOrDefault())
+            <input type="checkbox" ng-model="evenement.muziekVergunning" />
             <span>Muziek?</span>
         </div>
-        <button type="submit" class="btn btn-success">Omschrijving opslaan</button>            
-    }
-</div>
+        <button type="submit" class="btn btn-success" ng-click="detailEvenementOpslaan">Omschrijving opslaan</button>
+    </div>
 
-<div class="well">
-    <h2>Dagen</h2>
-    <ul>
-        @foreach (var reservatiedatum in Model.ReservatieData)
-        {
-            <li>@reservatiedatum.ToShortDateString()</li>
-        }
-    </ul>
+    <div class="well">
+        <h2>Dagen</h2>
+        <ul ng-repeat="reservatieDatum in evenement.reservatieData">
+            <li>{{reservatieDatum}}</li>
+        </ul>
+    </div>
 </div>
 
 <div class="well">
