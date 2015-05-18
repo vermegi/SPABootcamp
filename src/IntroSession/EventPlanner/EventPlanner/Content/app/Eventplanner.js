@@ -39,6 +39,12 @@ eventplanner.controller('ReservatieDetailCtrl', function ($scope) {
     };
 });
 
+eventplanner.controller('PeriodeCtrl', function($scope) {
+    $scope.getOverlap = function(nieuweReservatie) {
+        
+    };
+});
+
 eventplanner.factory('reservatieSvc', function($http, $q, notifier) {
     return {
         getReservatieData: function (evenementId) {
