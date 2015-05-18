@@ -5,68 +5,72 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div ng-controller="detailEvenementCtrl" ng-init="init(@Model)">
-    <h1 ng-cloak>{{evenement.titel}}</h1>
-    <div class="well" ng-cloak>
-        <h2>Detail</h2>
-        <input type="hidden" ng-model="evenement.id"/>
-        <div class="form-group">
-            <label>Eigenaar: </label>
-            {{evenement.eigenaar}}
-        </div>
-        <div class="form-group">
-            <label>Omschrijving:</label>
-            <textarea class="form-control" rows="10" ng-model="evenement.omschrijving"></textarea>
+<div ng-controller="ReservatieDetailCtrl">
+    <div ng-controller="detailEvenementCtrl" ng-init="init(@Model)">
+        <h1 ng-cloak>{{evenement.titel}}</h1>
+        <div class="well" ng-cloak>
+            <h2>Detail</h2>
+            <input type="hidden" ng-model="evenement.id" />
+            <div class="form-group">
+                <label>Eigenaar: </label>
+                {{evenement.eigenaar}}
+            </div>
+            <div class="form-group">
+                <label>Omschrijving:</label>
+                <textarea class="form-control" rows="10" ng-model="evenement.omschrijving"></textarea>
+            </div>
+
+            <div class="form-group">
+                <input type="checkbox" ng-model="evenement.muziekVergunning" />
+                <span>Muziek?</span>
+            </div>
+            <button type="submit" class="btn btn-success" ng-click="detailEvenementOpslaan(evenement)">Omschrijving opslaan</button>
         </div>
 
-        <div class="form-group">
-            <input type="checkbox" ng-model="evenement.muziekVergunning" />
-            <span>Muziek?</span>
+        <div class="well" ng-cloak>
+            <h2>Dagen</h2>
+            <ul ng-repeat="reservatieDatum in evenement.reservatieData track by $index">
+                <li>{{reservatieDatum | date : 'dd-MM-yyyy'}}</li>
+            </ul>
+            <button type="button" class="btn btn-default" ng-click="nieuwePeriodeToevoegenVisibility.visible = true" ng-show="!nieuwePeriodeToevoegenVisibility.visible"><i class="glyphicon glyphicon-plus"></i> Nieuwe periode toevoegen</button>
         </div>
-        <button type="submit" class="btn btn-success" ng-click="detailEvenementOpslaan(evenement)">Omschrijving opslaan</button>
     </div>
 
-    <div class="well" ng-cloak>
-        <h2>Dagen</h2>
-        <ul ng-repeat="reservatieDatum in evenement.reservatieData track by $index">
-            <li>{{reservatieDatum | date : 'dd-MM-yyyy'}}</li>
-        </ul>
+    <div class="well" ng-show="nieuwePeriodeToevoegenVisibility.visible">
+        @*TODO: eerst overlap ophalen voordat een periode opgeslagen wordt*@
+
+        @using (Html.BeginForm("PeriodeToevoegen", "Reservatie", FormMethod.Post))
+        {
+            <div class="form-group">
+                <label>Van:</label>
+                @Html.TextBox("BeginDatumPeriode", "", new Dictionary<string, object> { { "class", "form-control" } })
+            </div>
+            <div class="form-group">
+                <label>Tot:</label>
+                @Html.TextBox("EindDatumPeriode", "", new Dictionary<string, object> { { "class", "form-control" } })
+            </div>
+            <div class="form-group">
+                <p class="input-group">
+                    <input class="form-control" type="text" placeholder="zoek een straat" />
+                    <span class="input-group-btn">
+                        <button class="btn btn-default"><i class="glyphicon glyphicon-plus"></i></button>
+                    </span>
+                </p>
+            </div>
+            <div>
+                <div><label for="Alle_Dagen"><input type="checkbox" name="Alle_Dagen" /> Alle dagen</label></div>
+                <div><label for="Maandag"><input type="checkbox" name="Maandag" /> Maandag</label></div>
+                <div><label for="Dinsdag"><input type="checkbox" name="Dinsdag" /> Dinsdag</label></div>
+                <div><label for="Woensdag"><input type="checkbox" name="Woensdag" /> Woensdag</label></div>
+                <div><label for="Donderdag"><input type="checkbox" name="Donderdag" /> Donderdag</label></div>
+                <div><label for="Vrijdag"><input type="checkbox" name="Vrijdag" /> Vrijdag</label></div>
+                <div><label for="Zaterdag"><input type="checkbox" name="Zaterdag" /> Zaterdag</label></div>
+                <div><label for="Zondag"><input type="checkbox" name="Zondag" /> Zondag</label></div>
+            </div>
+            <button type="submit" class="btn btn-success">Periode toevoegen</button>
+        }
     </div>
-</div>
 
-<div class="well">
-    @*TODO: eerst overlap ophalen voordat een periode opgeslagen wordt*@
-
-    @using (Html.BeginForm("PeriodeToevoegen", "Reservatie", FormMethod.Post)) 
-    {
-        <div class="form-group">
-            <label>Van:</label>
-            @Html.TextBox("BeginDatumPeriode","", new Dictionary<string, object> { { "class", "form-control" }})
-        </div>
-        <div class="form-group">
-            <label>Tot:</label>
-            @Html.TextBox("EindDatumPeriode","", new Dictionary<string, object> { { "class", "form-control" } })
-        </div>
-        <div class="form-group">
-            <p class="input-group">
-                <input class="form-control" type="text" placeholder="zoek een straat" />
-                <span class="input-group-btn">
-                    <button class="btn btn-default"><i class="glyphicon glyphicon-plus"></i></button>
-                </span>
-            </p>
-        </div>
-        <div>
-            <div><label for="Alle_Dagen"><input type="checkbox" name="Alle_Dagen" /> Alle dagen</label></div>
-            <div><label for="Maandag"><input type="checkbox" name="Maandag" /> Maandag</label></div>
-            <div><label for="Dinsdag"><input type="checkbox" name="Dinsdag" /> Dinsdag</label></div>
-            <div><label for="Woensdag"><input type="checkbox" name="Woensdag" /> Woensdag</label></div>
-            <div><label for="Donderdag"><input type="checkbox" name="Donderdag" /> Donderdag</label></div>
-            <div><label for="Vrijdag"><input type="checkbox" name="Vrijdag" /> Vrijdag</label></div>
-            <div><label for="Zaterdag"><input type="checkbox" name="Zaterdag" /> Zaterdag</label></div>
-            <div><label for="Zondag"><input type="checkbox" name="Zondag" /> Zondag</label></div>
-        </div>
-        <button type="submit" class="btn btn-success">Periode toevoegen</button>
-    }
 </div>
 
 @section scripts

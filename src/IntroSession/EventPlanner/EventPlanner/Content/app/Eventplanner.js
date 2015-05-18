@@ -33,6 +33,12 @@ eventplanner.controller('detailEvenementCtrl', function ($scope, reservatieSvc) 
     };
 });
 
+eventplanner.controller('ReservatieDetailCtrl', function ($scope) {
+    $scope.nieuwePeriodeToevoegenVisibility = {
+        visible: false
+    };
+});
+
 eventplanner.factory('reservatieSvc', function($http, $q, notifier) {
     return {
         getReservatieData: function (evenementId) {
