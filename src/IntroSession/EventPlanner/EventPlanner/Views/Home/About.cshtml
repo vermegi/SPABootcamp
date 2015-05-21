@@ -5,8 +5,16 @@
         Layout = "~/Views/Shared/_Layout.cshtml";
     }
 
-    <div class="jumbotron">
-        <h2>EventPlanner</h2>
+<div class="jumbotron">
+    <h2>EventPlanner</h2>
 
-        Jaja, da's hier een keipraktische applicatie.
-    </div>
+    Jaja, da's hier een keipraktische applicatie.
+</div>
+
+<div class="well" ng-app>
+    <label>Name: </label>
+    <input type="text" placeholder="Please type your name" ng-model="yourName"/>
+    <hr/>
+    <h1 ng-show="yourName">Hello {{1 + 1}} you, {{yourName}}</h1>
+
+</div>

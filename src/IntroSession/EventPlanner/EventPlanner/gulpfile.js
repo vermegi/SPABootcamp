@@ -10,8 +10,9 @@ gulp.task('copy', function() {
     var bower = {
         "bootstrap": "bootstrap/dist/**/*.{js,map,css,ttf,svg,woff,eot}",
         "jquery": "jquery/dist/jquery*.{js,map}",
-        "toastr": "toastr/toastr.*{js,css}"
-    }
+        "toastr": "toastr/toastr.*{js,css}",
+        "angular": "angular/angular.js"
+    };
 
     for (var destinationDir in bower) {
         gulp.src(paths.bower + bower[destinationDir])
