@@ -39,7 +39,7 @@
                 </div><!--/.nav-collapse -->
             </div><!--/.container-fluid -->
         </nav>
-        <div class="container-fluid">
+        <div class="container-fluid" ng-app="EventPlanner">
             @RenderBody()
         </div>
     </div>
@@ -48,7 +48,7 @@
     <link href="~/Content/lib/toastr/toastr.css" rel="stylesheet" />
     <script src="~/Content/lib/toastr/toastr.js"></script>
     <script src="~/Content/lib/angular/angular.js"></script>
-    
+    <script src="~/Content/app/eventplanner.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

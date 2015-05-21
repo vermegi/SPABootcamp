@@ -60,6 +60,10 @@
     <Reference Include="MvcContrib">
       <HintPath>..\packages\MvcContrib.2.0.95.0\lib\MvcContrib.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data.SQLite">
       <HintPath>..\packages\System.Data.SQLite.Core.1.0.96.0\lib\net45\System.Data.SQLite.dll</HintPath>
     </Reference>
@@ -132,6 +136,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Code\Extensions\ObjectExtensions.cs" />
     <Compile Include="Code\Extensions\StraatCollectionExtensions.cs" />
     <Compile Include="Code\Infrastructure\EntityFramework\MyDropCreateDatabaseAlways.cs" />
     <Compile Include="Contracts\BasisDataReservatieAanpassenCommand.cs" />
@@ -175,6 +180,7 @@
     <Content Include="Views\Reservatie\Detail.cshtml" />
     <Content Include="Content\lib\toastr\toastr.scss" />
     <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Content\app\eventplanner.js" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
