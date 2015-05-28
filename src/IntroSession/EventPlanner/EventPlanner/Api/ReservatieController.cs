@@ -21,7 +21,7 @@ namespace EventPlanner.Api
 
                     }).SingleOrDefault();
 
-                return Json(reservatie);
+                return Ok(reservatie);
             }
         }
     }

@@ -148,6 +148,7 @@
   <ItemGroup>
     <Compile Include="Api\ReservatieController.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Code\Extensions\StraatCollectionExtensions.cs" />
     <Compile Include="Code\Infrastructure\EntityFramework\MyDropCreateDatabaseAlways.cs" />
     <Compile Include="Contracts\BasisDataReservatieAanpassenCommand.cs" />
