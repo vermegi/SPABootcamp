@@ -26,4 +26,6 @@ bower install
 gulp
 ```
 
+Make sure you have a c:\temp directory on your system and IISExpress is installed. 
+
 This should do it. You can now open and run the eventplanner.sln solution. 
