@@ -146,6 +146,7 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Api\ReservatieController.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Code\Extensions\StraatCollectionExtensions.cs" />
     <Compile Include="Code\Infrastructure\EntityFramework\MyDropCreateDatabaseAlways.cs" />
@@ -198,7 +199,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Api\" />
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
