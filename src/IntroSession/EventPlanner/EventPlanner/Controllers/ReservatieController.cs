@@ -49,7 +49,7 @@ namespace EventPlanner.Controllers
                 }
 
                 evenement.Omschrijving = command.Omschrijving;
-                evenement.MuziekVergunning = command.Muziek;
+                evenement.MuziekVergunning = command.MuziekVergunning;
 
                 ctx.SaveChanges();
 

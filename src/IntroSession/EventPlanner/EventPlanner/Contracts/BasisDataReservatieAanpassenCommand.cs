@@ -8,6 +8,6 @@ namespace EventPlanner.Contracts
         public string Omschrijving { get; set; }
 
         public int Id { get; set; }
-        public bool Muziek { get; set; }
+        public bool MuziekVergunning { get; set; }
     }
 }
