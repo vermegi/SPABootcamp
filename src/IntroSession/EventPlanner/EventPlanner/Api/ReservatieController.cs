@@ -17,7 +17,7 @@ namespace EventPlanner.Api
                     select new EvenementDetail
                     {
                         Evenement = r,
-                        ReservatieData = r.Periodes.SelectMany<Periode, DateTime>(p => p.Dagen.Select(d => d.Datum))
+                        ReservatieData = r.Periodes.SelectMany(p => p.Dagen.Select(d => d.Datum))
 
                     }).SingleOrDefault();
 
