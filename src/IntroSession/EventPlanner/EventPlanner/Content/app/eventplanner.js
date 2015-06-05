@@ -19,13 +19,13 @@ eventplanner.config(['$httpProvider', function ($httpProvider) {
     $httpProvider.defaults.headers.get['Pragma'] = 'no-cache';
 }]);
 
-eventplanner.run(function ($rootScope, amMoment) {
-    amMoment.changeLocale('nl');
+eventplanner.run(function ($rootScope) {
     $rootScope.openCalendar = function ($event, calendar) {
         $event.preventDefault();
         $event.stopPropagation();
 
-        $rootScope[calendar] = true;
+        $rootScope[calendar] = {};
+        $rootScope[calendar].opened = true;
     };
 });
 
@@ -87,8 +87,15 @@ eventplanner.controller('StratenCtrl', function ($scope, $http) {
 });
 
 eventplanner.controller('ReservatiesCtrl', function ($scope, reservatieSvc) {
-    $scope.DatumVan = moment().toJSON();
-    $scope.DatumTot = moment().add(1, 'month').toJSON();
+    $scope.openCalendar = function ($event, calendar) {
+        $event.preventDefault();
+        $event.stopPropagation();
+
+        $scope[calendar] = true;
+    };
+
+    $scope.datumVan = moment().toJSON();
+    $scope.datumTot = moment().add(1, 'month').toJSON();
 
     $scope.callServer = function (tableState) {
         if (tableState == undefined) {
@@ -102,7 +109,7 @@ eventplanner.controller('ReservatiesCtrl', function ($scope, reservatieSvc) {
         var number = pagination.number || 10;  // Number of entries showed per page.
         var searchTerm = tableState.search.predicateObject === undefined ? '' : tableState.search.predicateObject.$;
 
-        reservatieSvc.getReservatiesData($scope.DatumVan, $scope.DatumTot, start, number, searchTerm).then(function (data) {
+        reservatieSvc.getReservatiesData($scope.datumVan, $scope.datumTot, start, number, searchTerm).then(function (data) {
             $scope.rowCollection = data.rows;
             tableState.pagination.numberOfPages = data.numberOfPages;  //set the number of pages so the pagination can update
             $scope.isLoading = false;

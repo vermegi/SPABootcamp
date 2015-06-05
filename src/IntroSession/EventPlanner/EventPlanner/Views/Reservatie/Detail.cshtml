@@ -43,20 +43,20 @@
         <div class="form-group">
             <label>Van:</label>
             <p class=" input-group">
-                <input type="text" class="form-control" datepicker-popup="dd-MM-yyyy" ng-model="nieuwereservatie.beginDatumPeriode" is-open="calendarVanOpened" close-text="Close"
-                       ng-click="openCalendar($event, 'calendarVanOpened')" />
+                <input type="text" class="form-control" datepicker-popup="dd-MM-yyyy" ng-model="nieuwereservatie.beginDatumPeriode" is-open="calendarVan.opened" close-text="Close"
+                       ng-click="openCalendar($event, 'calendarVan')" />
                 <span class="input-group-btn">
-                    <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'calendarVanOpened')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'calendarVan')"><i class="glyphicon glyphicon-calendar"></i></button>
                 </span>
             </p>
         </div>
         <div class="form-group">
             <label>Tot:</label>
             <p class=" input-group">
-                <input type="text" class="form-control" datepicker-popup="dd-MM-yyyy" ng-model="nieuwereservatie.eindDatumPeriode" is-open="calendarTotOpened" close-text="Close"
-                       ng-click="openCalendar($event, 'calendarTotOpened')" />
+                <input type="text" class="form-control" datepicker-popup="dd-MM-yyyy" ng-model="nieuwereservatie.eindDatumPeriode" is-open="calendarTot.opened" close-text="Close"
+                       ng-click="openCalendar($event, 'calendarTot')" />
                 <span class="input-group-btn">
-                    <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'calendarTotOpened')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'calendarTot')"><i class="glyphicon glyphicon-calendar"></i></button>
                 </span>
             </p>
         </div>

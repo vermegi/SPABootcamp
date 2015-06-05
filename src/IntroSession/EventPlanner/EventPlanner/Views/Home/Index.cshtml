@@ -1,8 +1,4 @@
-﻿@using EventPlanner.Code.Extensions
-@using MvcContrib.UI.Grid
-@model IEnumerable<EventPlanner.Contracts.ReservatieResdata>
-
-@{
+﻿@{
     ViewBag.Title = "Evenementen QFrame";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -14,19 +10,19 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="input-group">
-                    <input type="text" ng-model="DatumVan" class="form-control" datepicker-popup="dd-MM-yyyy" is-open="OpenedVan"
-                           close-text="Sluiten" ng-click="openCalendar($event, 'OpenedVan')" ng-blur="Close();" />
+                    <input type="text" ng-model="datumVan" class="form-control" datepicker-popup="dd-MM-yyyy" is-open="van.opened"
+                           close-text="Sluiten" ng-click="openCalendar($event, 'van')" ng-blur="Close();" ng-change="callServer()" />
                     <span class="input-group-btn">
-                        <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'OpenedVan')"><i class="glyphicon glyphicon-calendar"></i></button>
+                        <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'van')"><i class="glyphicon glyphicon-calendar"></i></button>
                     </span>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="input-group">
-                    <input type="text" ng-model="DatumTot" class="form-control" datepicker-popup="dd-MM-yyyy" is-open="OpenedTot"
-                           close-text="Sluiten" ng-click="openCalendar($event, 'OpenedTot')" ng-blur="Close();" />
+                    <input type="text" ng-model="datumTot" class="form-control" datepicker-popup="dd-MM-yyyy" is-open="tot.opened"
+                           close-text="Sluiten" ng-click="openCalendar($event, 'tot')" ng-blur="Close();" ng-change="callServer()" />
                     <span class="input-group-btn">
-                        <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'OpenedTot')"><i class="glyphicon glyphicon-calendar"></i></button>
+                        <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'tot')"><i class="glyphicon glyphicon-calendar"></i></button>
                     </span>
                 </div>
             </div>
@@ -48,7 +44,7 @@
 
                 <tr ng-repeat="row in rowCollection">
                     <td>{{row.reservatiedatum | date : 'dd-MM-yyyy'}}</td>
-                    <td><a href="reservatie/Detail/{{row.id}}">{{row.titel}}</a></td>
+                    <td><a href="/reservatie/Detail/{{row.id}}">{{row.titel}}</a></td>
                     <td>{{row.straten}}</td>
                     <td>{{row.eigenaar}}</td>
                     <td>{{row.datumBeslissing | date : 'dd-MM-yyyy'}}</td>
