@@ -11,21 +11,26 @@
     <h2 class="sub-header">Komende Evenementen</h2>
     
     <div class="well">
-        @using (Html.BeginForm("PeriodeList", "Home", FormMethod.Post))
-        {
-            <div class="row">
-                <div class="col-lg-4">
-                    @Html.TextBox("DatumVan", DateTime.Now.Date.ToShortDateString(), new Dictionary<string, object> { { "class", "form-control" } })
-                </div>
-                <div class="col-lg-4">
-                    @Html.TextBox("DatumTot", DateTime.Now.AddMonths(4).Date.ToShortDateString(), new Dictionary<string, object> { { "class", "form-control" } })
-                    
-                </div>
-                <div class="col-lg-4">
-                    <input type="submit" value="Periode aanpassen" class="btn btn-primary" />                    
+        <div class="row">
+            <div class="col-md-6">
+                <div class="input-group">
+                    <input type="text" ng-model="DatumVan" class="form-control" datepicker-popup="dd-MM-yyyy" is-open="OpenedVan"
+                           close-text="Sluiten" ng-click="openCalendar($event, 'OpenedVan')" ng-blur="Close();" />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'OpenedVan')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
                 </div>
             </div>
-        }        
+            <div class="col-md-6">
+                <div class="input-group">
+                    <input type="text" ng-model="DatumTot" class="form-control" datepicker-popup="dd-MM-yyyy" is-open="OpenedTot"
+                           close-text="Sluiten" ng-click="openCalendar($event, 'OpenedTot')" ng-blur="Close();" />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'OpenedTot')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+            </div>
+        </div>
     </div>
     
     <div class="table-responsive">
