@@ -19,6 +19,7 @@ eventplanner.controller('DetailEvenementCtrl', function($scope, $http) {
         $http.get('/api/Reservatie/GetReservatieData', { params: { EvenementId: evenementId } })
             .success(function (data) {
                 $scope.evenement = data.evenement;
+                $scope.reservatieData = data.reservatieData;
             })
             .error(function (err) {
             debugger;
