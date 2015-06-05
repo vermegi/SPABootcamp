@@ -58,13 +58,13 @@
         </div>
         <div>
             <div><label for="Alle_Dagen"><input type="checkbox" name="Alle_Dagen" ng-model="nieuwereservatie.alle_Dagen" /> Alle dagen</label></div>
-            <div><label for="Maandag"><input type="checkbox" name="Maandag" ng-model="nieuwereservatie.maandag" /> Maandag</label></div>
-            <div><label for="Dinsdag"><input type="checkbox" name="Dinsdag" ng-model="nieuwereservatie.dinsdag" /> Dinsdag</label></div>
-            <div><label for="Woensdag"><input type="checkbox" name="Woensdag" ng-model="nieuwereservatie.woensdag" /> Woensdag</label></div>
-            <div><label for="Donderdag"><input type="checkbox" name="Donderdag" ng-model="nieuwereservatie.donderdag" /> Donderdag</label></div>
-            <div><label for="Vrijdag"><input type="checkbox" name="Vrijdag" ng-model="nieuwereservatie.vrijdag" /> Vrijdag</label></div>
-            <div><label for="Zaterdag"><input type="checkbox" name="Zaterdag" ng-model="nieuwereservatie.zaterdag" /> Zaterdag</label></div>
-            <div><label for="Zondag"><input type="checkbox" name="Zondag" ng-model="nieuwereservatie.zondag" /> Zondag</label></div>
+            <div><label for="Maandag"><input type="checkbox" name="Maandag" ng-model="nieuwereservatie.maandag" ng-checked="nieuwereservatie.alle_Dagen" /> Maandag</label></div>
+            <div><label for="Dinsdag"><input type="checkbox" name="Dinsdag" ng-model="nieuwereservatie.dinsdag" ng-checked="nieuwereservatie.alle_Dagen" /> Dinsdag</label></div>
+            <div><label for="Woensdag"><input type="checkbox" name="Woensdag" ng-model="nieuwereservatie.woensdag" ng-checked="nieuwereservatie.alle_Dagen" /> Woensdag</label></div>
+            <div><label for="Donderdag"><input type="checkbox" name="Donderdag" ng-model="nieuwereservatie.donderdag" ng-checked="nieuwereservatie.alle_Dagen" /> Donderdag</label></div>
+            <div><label for="Vrijdag"><input type="checkbox" name="Vrijdag" ng-model="nieuwereservatie.vrijdag" ng-checked="nieuwereservatie.alle_Dagen" /> Vrijdag</label></div>
+            <div><label for="Zaterdag"><input type="checkbox" name="Zaterdag" ng-model="nieuwereservatie.zaterdag" ng-checked="nieuwereservatie.alle_Dagen" /> Zaterdag</label></div>
+            <div><label for="Zondag"><input type="checkbox" name="Zondag" ng-model="nieuwereservatie.zondag" ng-checked="nieuwereservatie.alle_Dagen" /> Zondag</label></div>
         </div>
         <button type="submit" class="btn btn-success" ng-click="getOverlap(nieuwereservatie)">Periode toevoegen</button>
     </div>
