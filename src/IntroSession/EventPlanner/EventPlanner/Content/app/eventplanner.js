@@ -1,5 +1,5 @@
 ﻿//app stuff
-var eventplanner = angular.module("EventPlanner", ['ui.bootstrap', 'smart-table', 'angularMoment']);
+var eventplanner = angular.module("EventPlanner", ['ui.bootstrap', 'smart-table']);
 
 eventplanner.config(['$httpProvider', function ($httpProvider) {
     //initialize get if not there
