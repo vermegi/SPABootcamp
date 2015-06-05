@@ -19,7 +19,7 @@ namespace EventPlanner.Api
             return Ok(GetReservaties(datumVan, datumTot));
         }
 
-        private IEnumerable<ReservatieResdata> GetReservaties(DateTime datumVan, DateTime datumTot)
+        private List<ReservatieResdata> GetReservaties(DateTime datumVan, DateTime datumTot)
         {
             using (var ctx = new EvenementEntities())
             {
@@ -36,12 +36,13 @@ namespace EventPlanner.Api
                         v => v.Id,
                         (dp, v) => new { Dag = dp.Dag, Periode = dp.Periode, Vergunning = v, Straten = dp.Periode.Straten })
                     .ToList();
-                return vergunningen.Select(rrd => new ReservatieResdata
+                var result =  vergunningen.Select(rrd => new ReservatieResdata
                 {
                     Evenement = rrd.Vergunning,
                     Reservatiedatum = rrd.Dag.Datum,
                     Straten = rrd.Straten.OrderBy(s => s.Straatnaam).ToList()
                 }).ToList();
+                return result;
             }
         }
     }

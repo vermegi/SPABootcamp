@@ -133,6 +133,8 @@
     <Content Include="Content\css\custom.min.css">
       <DependentUpon>custom.css</DependentUpon>
     </Content>
+    <Content Include="Content\lib\angularmoment\angular-moment.js" />
+    <Content Include="Content\lib\angularmoment\angular-moment.min.js" />
     <Content Include="Content\lib\angularui\ui-bootstrap-tpls.js" />
     <Content Include="Content\lib\angularui\ui-bootstrap-tpls.min.js" />
     <Content Include="Content\lib\angularui\ui-bootstrap.js" />
@@ -148,6 +150,14 @@
     <Content Include="Content\lib\bootstrap\js\npm.js" />
     <Content Include="Content\lib\jquery\jquery.js" />
     <Content Include="Content\lib\jquery\jquery.min.js" />
+    <Content Include="Content\lib\moment\locales.js" />
+    <Content Include="Content\lib\moment\locales.min.js" />
+    <Content Include="Content\lib\moment\moment-with-locales.js" />
+    <Content Include="Content\lib\moment\moment-with-locales.min.js" />
+    <Content Include="Content\lib\moment\moment.min.js" />
+    <Content Include="Content\lib\moment\tests.js" />
+    <Content Include="Content\lib\smarttable\smart-table.js" />
+    <Content Include="Content\lib\smarttable\smart-table.min.js" />
     <Content Include="Content\lib\toastr\toastr.css" />
     <Content Include="Content\lib\toastr\toastr.js" />
     <Content Include="Content\lib\toastr\toastr.min.css" />

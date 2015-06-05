@@ -1,5 +1,5 @@
 ﻿//app stuff
-var eventplanner = angular.module("EventPlanner", ['ui.bootstrap']);
+var eventplanner = angular.module("EventPlanner", ['ui.bootstrap', 'smart-table', 'angularMoment']);
 
 eventplanner.config(['$httpProvider', function ($httpProvider) {
     //initialize get if not there
@@ -19,7 +19,8 @@ eventplanner.config(['$httpProvider', function ($httpProvider) {
     $httpProvider.defaults.headers.get['Pragma'] = 'no-cache';
 }]);
 
-eventplanner.run(function ($rootScope) {
+eventplanner.run(function ($rootScope, amMoment) {
+    amMoment.changeLocale('nl');
     $rootScope.openCalendar = function ($event, calendar) {
         $event.preventDefault();
         $event.stopPropagation();
@@ -85,13 +86,11 @@ eventplanner.controller('StratenCtrl', function ($scope, $http) {
     });
 });
 
-SBApp.controller('ReservatiesCtrl', function ($scope, reservatieSvc) {
-
-    //$scope.DatumVan = moment().format('DD-MM-YYYY');
-    //$scope.DatumTot = moment().add(1, 'month').format('DD-MM-YYYY');
+eventplanner.controller('ReservatiesCtrl', function ($scope, reservatieSvc) {
+    $scope.DatumVan = moment().toJSON();
+    $scope.DatumTot = moment().add(1, 'month').toJSON();
 
     $scope.callServer = function (tableState) {
-
         if (tableState == undefined) {
             tableState = { pagination: { start: 0, number: 10 }, search: { predicateObject: { $: "" } } };
         }
@@ -104,8 +103,9 @@ SBApp.controller('ReservatiesCtrl', function ($scope, reservatieSvc) {
         var searchTerm = tableState.search.predicateObject === undefined ? '' : tableState.search.predicateObject.$;
 
         reservatieSvc.getReservatiesData($scope.DatumVan, $scope.DatumTot, start, number, searchTerm).then(function (data) {
-            $scope.rowCollection = data.Rows;
-            tableState.pagination.numberOfPages = data.NumberOfPages;  //set the number of pages so the pagination can update
+            debugger;
+            $scope.rowCollection = data.rows;
+            tableState.pagination.numberOfPages = data.numberOfPages;  //set the number of pages so the pagination can update
             $scope.isLoading = false;
         });
     };
@@ -136,7 +136,10 @@ eventplanner.factory('reservatieSvc', function($http, $q, notifier) {
         },
         getReservatiesData: function (datumVan, datumTot, start, number, searchTerm) {
             var dfd = $q.defer();
-            $http.get('/Reservaties/GetReservatiesData', { params: { DatumVan: datumVan, DatumTot: datumTot, Start: start, Number: number, SearchTerm: searchTerm } }).success(dfd.resolve).error(function () {
+            $http.get('/api/Reservaties/GetForDate', { params: { DatumVan: datumVan, DatumTot: datumTot, Start: start, Number: number, SearchTerm: searchTerm } })
+                .success(dfd.resolve)
+                .error(function (err) {
+                debugger;
                 notifier.error('Er is iets misgelopen');
             });
             return dfd.promise;
