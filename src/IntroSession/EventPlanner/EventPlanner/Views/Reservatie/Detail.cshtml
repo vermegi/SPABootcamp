@@ -65,9 +65,12 @@
                 <input class="form-control" type="text" placeholder="zoek een straat" ng-model="geselecteerdeStraat"
                        typeahead="address as address.Straatnaam for address in getLocations($viewValue)" typeahead-loading="loadingLocations" />
                 <span class="input-group-btn">
-                    <button class="btn btn-default"><i class="glyphicon glyphicon-plus"></i></button>
+                    <button class="btn btn-default" ng-click="straatToevoegen(geselecteerdeStraat)"><i class="glyphicon glyphicon-plus"></i></button>
                 </span>
                 <i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i>
+                <ul ng-repeat="straat in toegevoegdeStraten">
+                    <li>{{straat.Straatnaam}} <i class="glyphicon glyphicon-remove-circle" ng-click="straatVerwijderen(straat)"></i></li>
+                </ul>
             </p>
         </div>
         <div>

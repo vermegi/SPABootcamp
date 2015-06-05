@@ -51,8 +51,21 @@ eventplanner.controller('ReservatieDetailCtrl', function($scope) {
 });
 
 eventplanner.controller('PeriodeCtrl', function ($scope) {
+    $scope.toegevoegdeStraten = [];
     $scope.getOverlap = function (nieuweReservatie) {
 
+    };
+
+    $scope.straatToevoegen = function (geselecteerdeStraat) {
+        if (geselecteerdeStraat === undefined || geselecteerdeStraat.Id === undefined)
+            return;
+        $scope.toegevoegdeStraten.push(geselecteerdeStraat);
+        $scope.$broadcast('straatGeselecteerd');
+    };
+
+    $scope.straatVerwijderen = function (straat) {
+        var index = $scope.toegevoegdeStraten.indexOf(straat);
+        $scope.toegevoegdeStraten.splice(index, 1);
     };
 });
 
@@ -66,6 +79,10 @@ eventplanner.controller('StratenCtrl', function ($scope, $http) {
                 return response.data;
             });
     }
+
+    $scope.$on('straatGeselecteerd', function () {
+        $scope.geselecteerdeStraat = '';
+    });
 });
 
 //services
