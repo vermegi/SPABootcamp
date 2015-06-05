@@ -1,4 +1,5 @@
-﻿var eventplanner = angular.module("EventPlanner", []);
+﻿//app stuff
+var eventplanner = angular.module("EventPlanner", []);
 
 eventplanner.config(['$httpProvider', function ($httpProvider) {
     //initialize get if not there
@@ -18,6 +19,7 @@ eventplanner.config(['$httpProvider', function ($httpProvider) {
     $httpProvider.defaults.headers.get['Pragma'] = 'no-cache';
 }]);
 
+//controllers
 eventplanner.controller('DetailEvenementCtrl', function($scope, reservatieSvc) {
 
     $scope.detailEvenementOpslaan = function() {
@@ -33,6 +35,19 @@ eventplanner.controller('DetailEvenementCtrl', function($scope, reservatieSvc) {
     };
 });
 
+eventplanner.controller('ReservatieDetailCtrl', function($scope) {
+    $scope.nieuwePeriodeToevoegenVisibility = {
+        visible: false
+    };
+});
+
+eventplanner.controller('PeriodeCtrl', function ($scope) {
+    $scope.getOverlap = function (nieuweReservatie) {
+
+    };
+});
+
+//services
 eventplanner.factory('reservatieSvc', function($http, $q, notifier) {
     return {
         getReservatieData: function (evenementId) {

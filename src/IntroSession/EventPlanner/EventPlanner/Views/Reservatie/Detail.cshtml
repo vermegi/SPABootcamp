@@ -5,47 +5,48 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div ng-controller="DetailEvenementCtrl" ng-init="init(@Model)" ng-cloak>
-    <h1>{{evenement.titel}}</h1>
-    <div class="well">
-        <h2>Detail</h2>
-        <input type="hidden" ng-model="evenement.id" />
-        <div class="form-group">
-            <label>Eigenaar: </label>
-            {{evenement.eigenaar}}
-        </div>
-        <div class="form-group">
-            <label>Omschrijving:</label>
-            <textarea class="form-control" rows="10" ng-model="evenement.omschrijving"></textarea>
+<div ng-controller="ReservatieDetailCtrl">
+    <div ng-controller="DetailEvenementCtrl" ng-init="init(@Model)" ng-cloak>
+        <h1>{{evenement.titel}}</h1>
+        <div class="well">
+            <h2>Detail</h2>
+            <input type="hidden" ng-model="evenement.id" />
+            <div class="form-group">
+                <label>Eigenaar: </label>
+                {{evenement.eigenaar}}
+            </div>
+            <div class="form-group">
+                <label>Omschrijving:</label>
+                <textarea class="form-control" rows="10" ng-model="evenement.omschrijving"></textarea>
+            </div>
+
+            <div class="form-group">
+                <input type="checkbox" ng-model="evenement.muziekVergunning" />
+                <span>Muziek?</span>
+            </div>
+            <button type="submit" class="btn btn-success" ng-click="detailEvenementOpslaan()">Omschrijving opslaan</button>
         </div>
 
-        <div class="form-group">
-            <input type="checkbox" ng-model="evenement.muziekVergunning" />
-            <span>Muziek?</span>
+        <div class="well">
+            <h2>Dagen</h2>
+            <ul ng-repeat="reservatieDatum in reservatieData track by $index">
+                <li>{{reservatieDatum | date: 'dd-MM-yyyy'}}</li>
+            </ul>
+            <button type="button" class="btn btn-default" ng-click="nieuwePeriodeToevoegenVisibility.visible = true"
+                    ng-show="!nieuwePeriodeToevoegenVisibility.visible">
+                <i class="glyphicon glyphicon-plus"></i> Nieuwe periode toevoegen
+            </button>
         </div>
-        <button type="submit" class="btn btn-success" ng-click="detailEvenementOpslaan()">Omschrijving opslaan</button>
     </div>
 
-    <div class="well">
-        <h2>Dagen</h2>
-        <ul ng-repeat="reservatieDatum in reservatieData track by $index">
-            <li>{{reservatieDatum | date: 'dd-MM-yyyy'}}</li>
-        </ul>
-    </div>
-</div>
-
-<div class="well">
-    @*TODO: eerst overlap ophalen voordat een periode opgeslagen wordt*@
-
-    @using (Html.BeginForm("PeriodeToevoegen", "Reservatie", FormMethod.Post)) 
-    {
+    <div class="well" ng-controller="PeriodeCtrl" ng-show="nieuwePeriodeToevoegenVisibility.visible">
         <div class="form-group">
             <label>Van:</label>
-            @Html.TextBox("BeginDatumPeriode","", new Dictionary<string, object> { { "class", "form-control" }})
+            <input type="text" class="form-control" ng-model="nieuwereservatie.beginDatumPeriode" />
         </div>
         <div class="form-group">
             <label>Tot:</label>
-            @Html.TextBox("EindDatumPeriode","", new Dictionary<string, object> { { "class", "form-control" } })
+            <input type="text" class="form-control" ng-model="nieuwereservatie.eindDatumPeriode" />
         </div>
         <div class="form-group">
             <p class="input-group">
@@ -56,38 +57,16 @@
             </p>
         </div>
         <div>
-            <div><label for="Alle_Dagen"><input type="checkbox" name="Alle_Dagen" /> Alle dagen</label></div>
-            <div><label for="Maandag"><input type="checkbox" name="Maandag" /> Maandag</label></div>
-            <div><label for="Dinsdag"><input type="checkbox" name="Dinsdag" /> Dinsdag</label></div>
-            <div><label for="Woensdag"><input type="checkbox" name="Woensdag" /> Woensdag</label></div>
-            <div><label for="Donderdag"><input type="checkbox" name="Donderdag" /> Donderdag</label></div>
-            <div><label for="Vrijdag"><input type="checkbox" name="Vrijdag" /> Vrijdag</label></div>
-            <div><label for="Zaterdag"><input type="checkbox" name="Zaterdag" /> Zaterdag</label></div>
-            <div><label for="Zondag"><input type="checkbox" name="Zondag" /> Zondag</label></div>
+            <div><label for="Alle_Dagen"><input type="checkbox" name="Alle_Dagen" ng-model="nieuwereservatie.alle_Dagen" /> Alle dagen</label></div>
+            <div><label for="Maandag"><input type="checkbox" name="Maandag" ng-model="nieuwereservatie.maandag" /> Maandag</label></div>
+            <div><label for="Dinsdag"><input type="checkbox" name="Dinsdag" ng-model="nieuwereservatie.dinsdag" /> Dinsdag</label></div>
+            <div><label for="Woensdag"><input type="checkbox" name="Woensdag" ng-model="nieuwereservatie.woensdag" /> Woensdag</label></div>
+            <div><label for="Donderdag"><input type="checkbox" name="Donderdag" ng-model="nieuwereservatie.donderdag" /> Donderdag</label></div>
+            <div><label for="Vrijdag"><input type="checkbox" name="Vrijdag" ng-model="nieuwereservatie.vrijdag" /> Vrijdag</label></div>
+            <div><label for="Zaterdag"><input type="checkbox" name="Zaterdag" ng-model="nieuwereservatie.zaterdag" /> Zaterdag</label></div>
+            <div><label for="Zondag"><input type="checkbox" name="Zondag" ng-model="nieuwereservatie.zondag" /> Zondag</label></div>
         </div>
-        <button type="submit" class="btn btn-success">Periode toevoegen</button>
-    }
-</div>
+        <button type="submit" class="btn btn-success" ng-click="getOverlap(nieuwereservatie)">Periode toevoegen</button>
+    </div>
 
-@section scripts
-{
-    <script type="text/javascript">
-        toastr.options = {
-            "closeButton": false,
-            "debug": false,
-            "newestOnTop": false,
-            "progressBar": false,
-            "positionClass": "toast-top-right",
-            "preventDuplicates": false,
-            "onclick": null,
-            "showDuration": "300",
-            "hideDuration": "1000",
-            "timeOut": "5000",
-            "extendedTimeOut": "1000",
-            "showEasing": "swing",
-            "hideEasing": "linear",
-            "showMethod": "fadeIn",
-            "hideMethod": "fadeOut"
-        };
-    </script>
-}
+</div>
