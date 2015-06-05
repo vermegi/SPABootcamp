@@ -47,11 +47,11 @@
             <tbody ng-show="!isLoading">
 
                 <tr ng-repeat="row in rowCollection">
-                    <td>{{row.Reservatiedatum | date : 'dd-MM-yyyy'}}</td>
-                    <td><a href="reservatie/Detail/{{row.Id}}">{{row.Titel}}</a></td>
-                    <td>{{row.Straten}}</td>
-                    <td>{{row.Eigenaar}}</td>
-                    <td>{{row.DatumBeslissing | date : 'dd-MM-yyyy'}}</td>
+                    <td>{{row.reservatiedatum | date : 'dd-MM-yyyy'}}</td>
+                    <td><a href="reservatie/Detail/{{row.id}}">{{row.titel}}</a></td>
+                    <td>{{row.straten}}</td>
+                    <td>{{row.eigenaar}}</td>
+                    <td>{{row.datumBeslissing | date : 'dd-MM-yyyy'}}</td>
                 </tr>
             </tbody>
             <tbody ng-show="isLoading">

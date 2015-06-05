@@ -103,7 +103,6 @@ eventplanner.controller('ReservatiesCtrl', function ($scope, reservatieSvc) {
         var searchTerm = tableState.search.predicateObject === undefined ? '' : tableState.search.predicateObject.$;
 
         reservatieSvc.getReservatiesData($scope.DatumVan, $scope.DatumTot, start, number, searchTerm).then(function (data) {
-            debugger;
             $scope.rowCollection = data.rows;
             tableState.pagination.numberOfPages = data.numberOfPages;  //set the number of pages so the pagination can update
             $scope.isLoading = false;
@@ -139,7 +138,6 @@ eventplanner.factory('reservatieSvc', function($http, $q, notifier) {
             $http.get('/api/Reservaties/GetForDate', { params: { DatumVan: datumVan, DatumTot: datumTot, Start: start, Number: number, SearchTerm: searchTerm } })
                 .success(dfd.resolve)
                 .error(function (err) {
-                debugger;
                 notifier.error('Er is iets misgelopen');
             });
             return dfd.promise;
