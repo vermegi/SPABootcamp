@@ -5,25 +5,25 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div ng-controller="DetailEvenementCtrl" ng-init="init(@Model)">
+<div ng-controller="DetailEvenementCtrl" ng-init="init(@Model)" ng-cloak>
     <h1>{{evenement.titel}}</h1>
     <div class="well">
         <h2>Detail</h2>
-            <input type="hidden" ng-model="evenement.id"/>
-            <div class="form-group">
-                <label>Eigenaar: </label>
-                {{evenement.eigenaar}}
-            </div>
-            <div class="form-group">
-                <label>Omschrijving:</label>
-                <textarea class="form-control" rows="10" ng-model="evenement.omschrijving"></textarea>
-            </div>
+        <input type="hidden" ng-model="evenement.id" />
+        <div class="form-group">
+            <label>Eigenaar: </label>
+            {{evenement.eigenaar}}
+        </div>
+        <div class="form-group">
+            <label>Omschrijving:</label>
+            <textarea class="form-control" rows="10" ng-model="evenement.omschrijving"></textarea>
+        </div>
 
         <div class="form-group">
-            <input type="checkbox" ng-model="evenement.muziekVergunning"/>
+            <input type="checkbox" ng-model="evenement.muziekVergunning" />
             <span>Muziek?</span>
         </div>
-            <button type="submit" class="btn btn-success" ng-click="detailEvenementOpslaan()">Omschrijving opslaan</button>
+        <button type="submit" class="btn btn-success" ng-click="detailEvenementOpslaan()">Omschrijving opslaan</button>
     </div>
 
     <div class="well">
