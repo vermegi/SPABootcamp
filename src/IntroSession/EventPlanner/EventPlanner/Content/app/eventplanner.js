@@ -29,6 +29,16 @@ eventplanner.run(function ($rootScope) {
     };
 });
 
+//directives
+eventplanner.directive('evenementheader', function() {
+    return {
+        scope: {
+            evenementInfo: '=info'
+        },
+        template: '{{evenementInfo.titel}} ({{evenementInfo.eigenaar}})'
+    };
+});
+
 //controllers
 eventplanner.controller('DetailEvenementCtrl', function($scope, reservatieSvc) {
 

@@ -44,7 +44,7 @@
 
                 <tr ng-repeat="row in rowCollection">
                     <td>{{row.reservatiedatum | date : 'dd-MM-yyyy'}}</td>
-                    <td><a href="/reservatie/Detail/{{row.id}}">{{row.titel}}</a></td>
+                    <td><a href="/reservatie/Detail/{{row.id}}"><evenementheader info="row"></evenementheader></a></td>
                     <td>{{row.straten}}</td>
                     <td>{{row.eigenaar}}</td>
                     <td>{{row.datumBeslissing | date : 'dd-MM-yyyy'}}</td>

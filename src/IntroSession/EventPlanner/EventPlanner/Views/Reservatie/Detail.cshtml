@@ -7,7 +7,9 @@
 
 <div ng-controller="ReservatieDetailCtrl">
     <div ng-controller="DetailEvenementCtrl" ng-init="init(@Model)" ng-cloak>
-        <h1>{{evenement.titel}}</h1>
+        <h1>
+            <evenementheader info="evenement"></evenementheader>
+        </h1>
         <div class="well">
             <h2>Detail</h2>
             <input type="hidden" ng-model="evenement.id" />
