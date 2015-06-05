@@ -12,21 +12,7 @@ namespace EventPlanner.Controllers
     {
         public ActionResult Detail(int Id)
         {
-            using (var ctx = new EvenementEntities())
-            {
-                var evenement = (from e in ctx.Evenementen
-                                  where e.Id == Id
-                                  select new EvenementWithMessage
-                                  {
-                                      Evenement = e,
-                                      ReservatieData = e.Periodes.SelectMany(p => p.Dagen).Select(d => d.Datum)
-                                  }).SingleOrDefault();
-
-                if (evenement == null)
-                    evenement = new EvenementWithMessage();
-
-                return View(evenement);
-            }
+            return View(Id);
         }
 
         public ActionResult OmschrijvingAanpassen(BasisDataReservatieAanpassenCommand command)

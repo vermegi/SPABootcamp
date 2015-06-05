@@ -1,11 +1,11 @@
-﻿@model EventPlanner.Contracts.EvenementWithMessage
+﻿@model Int32
 
 @{
     ViewBag.Title = "Evenement detail";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div ng-controller="DetailEvenementCtrl">
+<div ng-controller="DetailEvenementCtrl" ng-init="init(@Model)">
     <h1>{{evenement.titel}}</h1>
     <div class="well">
         <h2>Detail</h2>
@@ -39,7 +39,6 @@
 
     @using (Html.BeginForm("PeriodeToevoegen", "Reservatie", FormMethod.Post)) 
     {
-        @Html.Hidden("Id", Model.Evenement.Id)
         <div class="form-group">
             <label>Van:</label>
             @Html.TextBox("BeginDatumPeriode","", new Dictionary<string, object> { { "class", "form-control" }})
@@ -90,8 +89,5 @@
             "showMethod": "fadeIn",
             "hideMethod": "fadeOut"
         };
-        var message = "@Model.Message";
-        if (message != "")
-            toastr["success"]("@Model.Message", "");
     </script>
 }

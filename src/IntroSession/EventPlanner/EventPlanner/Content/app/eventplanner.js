@@ -1,6 +1,6 @@
 ﻿var eventplanner = angular.module("EventPlanner", []);
 
-eventplanner.controller('DetailEvenementCtrl', function($scope) {
+eventplanner.controller('DetailEvenementCtrl', function($scope, $http) {
 
     $scope.evenement = {
         titel: 'titel van het evenement',
@@ -13,5 +13,16 @@ eventplanner.controller('DetailEvenementCtrl', function($scope) {
 
     $scope.detailEvenementOpslaan = function() {
         
+    };
+
+    $scope.init = function(evenementId) {
+        $http.get('/api/Reservatie/GetReservatieData', { params: { EvenementId: evenementId } })
+            .success(function (data) {
+                $scope.evenement = data.evenement;
+            })
+            .error(function (err) {
+            debugger;
+                alert('something went wrong!');
+            });
     };
 });
