@@ -85,6 +85,34 @@ eventplanner.controller('StratenCtrl', function ($scope, $http) {
     });
 });
 
+SBApp.controller('ReservatiesCtrl', function ($scope, reservatieSvc) {
+
+    //$scope.DatumVan = moment().format('DD-MM-YYYY');
+    //$scope.DatumTot = moment().add(1, 'month').format('DD-MM-YYYY');
+
+    $scope.callServer = function (tableState) {
+
+        if (tableState == undefined) {
+            tableState = { pagination: { start: 0, number: 10 }, search: { predicateObject: { $: "" } } };
+        }
+
+        $scope.isLoading = true;
+        var pagination = tableState.pagination;
+
+        var start = pagination.start || 0;     // This is NOT the page number, but the index of item in the list that you want to use to display the table.
+        var number = pagination.number || 10;  // Number of entries showed per page.
+        var searchTerm = tableState.search.predicateObject === undefined ? '' : tableState.search.predicateObject.$;
+
+        reservatieSvc.getReservatiesData($scope.DatumVan, $scope.DatumTot, start, number, searchTerm).then(function (data) {
+            $scope.rowCollection = data.Rows;
+            tableState.pagination.numberOfPages = data.NumberOfPages;  //set the number of pages so the pagination can update
+            $scope.isLoading = false;
+        });
+    };
+});
+
+
+
 //services
 eventplanner.factory('reservatieSvc', function($http, $q, notifier) {
     return {
@@ -105,6 +133,13 @@ eventplanner.factory('reservatieSvc', function($http, $q, notifier) {
                 .error(function () {
                     notifier.error("something went wrong");
                 });
+        },
+        getReservatiesData: function (datumVan, datumTot, start, number, searchTerm) {
+            var dfd = $q.defer();
+            $http.get('/Reservaties/GetReservatiesData', { params: { DatumVan: datumVan, DatumTot: datumTot, Start: start, Number: number, SearchTerm: searchTerm } }).success(dfd.resolve).error(function () {
+                notifier.error('Er is iets misgelopen');
+            });
+            return dfd.promise;
         }
     }
 });

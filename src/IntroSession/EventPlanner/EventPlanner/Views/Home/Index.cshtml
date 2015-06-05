@@ -7,9 +7,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="col-sm-12 col-md-12 main">
+<div class="col-sm-12 col-md-12 main" ng-controller="ReservatiesCtrl">
     <h2 class="sub-header">Komende Evenementen</h2>
-    
+
     <div class="well">
         <div class="row">
             <div class="col-md-6">
@@ -33,17 +33,38 @@
         </div>
     </div>
     
-    <div class="table-responsive">
-        @Html.Grid(Model).Attributes(new Dictionary<string, object> { { "id", "ReservatieTable" }, { "class", "table table-striped" } }).Columns(column =>
-        {
-            column.For(c => c.Evenement.Omschrijving);
-            column.For(c => c.Straten.ToKommaSeparatedString()).Named("Straten");
-            column.For(c => c.Evenement.Eigenaar);
-            column.For(c => c.Evenement.DatumBeslissing);
-            column.For(c => c.Reservatiedatum);
-            column.For(c => Html.ActionLink("Detail", "Detail", "Reservatie", new { Id = c.Evenement.Id }, new { Id = c.Evenement.Id }));
-        })
-        
+    <div>
+        <table st-table="rowCollection" class="table table-striped" st-pipe="callServer">
+            <thead>
+                <tr>
+                    <th class="col-md-2">Datum</th>
+                    <th class="col-md-4">Titel</th>
+                    <th class="col-md-2">Locaties</th>
+                    <th class="col-md-2">Eigenaar</th>
+                    <th class="col-md-2">Datum Beslissing</th>
+                </tr>
+            </thead>
+            <tbody ng-show="!isLoading">
+
+                <tr ng-repeat="row in rowCollection">
+                    <td>{{row.Reservatiedatum | date : 'dd-MM-yyyy'}}</td>
+                    <td><a href="reservatie/Detail/{{row.Id}}">{{row.Titel}}</a></td>
+                    <td>{{row.Straten}}</td>
+                    <td>{{row.Eigenaar}}</td>
+                    <td>{{row.DatumBeslissing | date : 'dd-MM-yyyy'}}</td>
+                </tr>
+            </tbody>
+            <tbody ng-show="isLoading">
+                <tr>
+                    <td colspan="5" class="text-center">Bezig met laden ... </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td class="text-center" st-pagination="" st-items-by-page="10" colspan="5"></td>
+                </tr>
+            </tfoot>
+        </table>
     </div>
 
 </div>
