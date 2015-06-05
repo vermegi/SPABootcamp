@@ -1,0 +1,84 @@
+﻿<div>
+    <div ng-controller="DetailEvenementCtrl" ng-init="init(@Model)" ng-cloak>
+        <h1>
+            <evenementheader info="evenement"></evenementheader>
+        </h1>
+        <div class="well">
+            <h2>Detail</h2>
+            <input type="hidden" ng-model="evenement.id" />
+            <div class="form-group">
+                <label>Eigenaar: </label>
+                {{evenement.eigenaar}}
+            </div>
+            <div class="form-group">
+                <label>Omschrijving:</label>
+                <textarea class="form-control" rows="10" ng-model="evenement.omschrijving"></textarea>
+            </div>
+
+            <div class="form-group">
+                <input type="checkbox" ng-model="evenement.muziekVergunning" />
+                <span>Muziek?</span>
+            </div>
+            <button type="submit" class="btn btn-success" ng-click="detailEvenementOpslaan()">Omschrijving opslaan</button>
+        </div>
+
+        <div class="well">
+            <h2>Dagen</h2>
+            <ul ng-repeat="reservatieDatum in reservatieData track by $index">
+                <li>{{reservatieDatum | date: 'dd-MM-yyyy'}}</li>
+            </ul>
+            <button type="button" class="btn btn-default" ng-click="nieuwePeriodeToevoegenVisibility.visible = true"
+                    ng-show="!nieuwePeriodeToevoegenVisibility.visible">
+                <i class="glyphicon glyphicon-plus"></i> Nieuwe periode toevoegen
+            </button>
+        </div>
+    </div>
+
+    <div class="well" ng-controller="PeriodeCtrl" ng-show="nieuwePeriodeToevoegenVisibility.visible">
+        <div class="form-group">
+            <label>Van:</label>
+            <p class=" input-group">
+                <input type="text" class="form-control" datepicker-popup="dd-MM-yyyy" ng-model="nieuwereservatie.beginDatumPeriode" is-open="calendarVan.opened" close-text="Close"
+                       ng-click="openCalendar($event, 'calendarVan')" />
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'calendarVan')"><i class="glyphicon glyphicon-calendar"></i></button>
+                </span>
+            </p>
+        </div>
+        <div class="form-group">
+            <label>Tot:</label>
+            <p class=" input-group">
+                <input type="text" class="form-control" datepicker-popup="dd-MM-yyyy" ng-model="nieuwereservatie.eindDatumPeriode" is-open="calendarTot.opened" close-text="Close"
+                       ng-click="openCalendar($event, 'calendarTot')" />
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'calendarTot')"><i class="glyphicon glyphicon-calendar"></i></button>
+                </span>
+            </p>
+        </div>
+        <div class="form-group" ng-controller="StratenCtrl">
+            <p class="input-group">
+                <input class="form-control" type="text" placeholder="zoek een straat" ng-model="geselecteerdeStraat"
+                       typeahead="address as address.Straatnaam for address in getLocations($viewValue)" typeahead-loading="loadingLocations" />
+                <span class="input-group-btn">
+                    <button class="btn btn-default" ng-click="straatToevoegen(geselecteerdeStraat)"><i class="glyphicon glyphicon-plus"></i></button>
+                </span>
+                <i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i>
+                <ul ng-repeat="straat in toegevoegdeStraten">
+                    <li>{{straat.Straatnaam}} <i class="glyphicon glyphicon-remove-circle" ng-click="straatVerwijderen(straat)"></i></li>
+                </ul>
+            </p>
+        </div>
+        <div>
+            <div><label for="Alle_Dagen"><input type="checkbox" name="Alle_Dagen" ng-model="nieuwereservatie.alle_Dagen" /> Alle dagen</label></div>
+            <div><label for="Maandag"><input type="checkbox" name="Maandag" ng-model="nieuwereservatie.maandag" ng-checked="nieuwereservatie.alle_Dagen" /> Maandag</label></div>
+            <div><label for="Dinsdag"><input type="checkbox" name="Dinsdag" ng-model="nieuwereservatie.dinsdag" ng-checked="nieuwereservatie.alle_Dagen" /> Dinsdag</label></div>
+            <div><label for="Woensdag"><input type="checkbox" name="Woensdag" ng-model="nieuwereservatie.woensdag" ng-checked="nieuwereservatie.alle_Dagen" /> Woensdag</label></div>
+            <div><label for="Donderdag"><input type="checkbox" name="Donderdag" ng-model="nieuwereservatie.donderdag" ng-checked="nieuwereservatie.alle_Dagen" /> Donderdag</label></div>
+            <div><label for="Vrijdag"><input type="checkbox" name="Vrijdag" ng-model="nieuwereservatie.vrijdag" ng-checked="nieuwereservatie.alle_Dagen" /> Vrijdag</label></div>
+            <div><label for="Zaterdag"><input type="checkbox" name="Zaterdag" ng-model="nieuwereservatie.zaterdag" ng-checked="nieuwereservatie.alle_Dagen" /> Zaterdag</label></div>
+            <div><label for="Zondag"><input type="checkbox" name="Zondag" ng-model="nieuwereservatie.zondag" ng-checked="nieuwereservatie.alle_Dagen" /> Zondag</label></div>
+        </div>
+        <button type="submit" class="btn btn-success" ng-click="getOverlap(nieuwereservatie)">Periode toevoegen</button>
+    </div>
+
+</div>
