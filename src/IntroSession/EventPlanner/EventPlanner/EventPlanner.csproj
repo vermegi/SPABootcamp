@@ -170,6 +170,8 @@
     <Compile Include="Models\Overlapping.cs" />
     <Compile Include="Models\OverlappingsDag.cs" />
     <Compile Include="Models\Periode.cs" />
+    <Compile Include="Models\ReservatieDataRow.cs" />
+    <Compile Include="Models\ReservatieListResult.cs" />
     <Compile Include="Models\Straat.cs" />
     <Compile Include="Models\VergunEntities.cs" />
     <Compile Include="Models\EvenementEntitiesInitializer.cs" />
