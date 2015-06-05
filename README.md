@@ -21,8 +21,11 @@ Restart your command prompt and make sure both bower and gulp got installed corr
 After cloning this repository to your desktop, in the command prompt go to the /src/IntroSession/EventPlanner/EventPlanner directory and issue the following commands:
 
 ```
+npm install
 bower install
 gulp
 ```
+
+Make sure you have a c:\temp directory on your system and IISExpress is installed. 
 
 This should do it. You can now open and run the eventplanner.sln solution. 
