@@ -147,6 +147,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Api\ReservatieController.cs" />
+    <Compile Include="Api\ReservatiesController.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Code\Extensions\StraatCollectionExtensions.cs" />
