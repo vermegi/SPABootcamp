@@ -1,5 +1,5 @@
 ﻿//app stuff
-var eventplanner = angular.module("EventPlanner", []);
+var eventplanner = angular.module("EventPlanner", ['ui.bootstrap']);
 
 eventplanner.config(['$httpProvider', function ($httpProvider) {
     //initialize get if not there
@@ -18,6 +18,15 @@ eventplanner.config(['$httpProvider', function ($httpProvider) {
     $httpProvider.defaults.headers.get['Cache-Control'] = 'no-cache';
     $httpProvider.defaults.headers.get['Pragma'] = 'no-cache';
 }]);
+
+eventplanner.run(function ($rootScope) {
+    $rootScope.openCalendar = function ($event, calendar) {
+        $event.preventDefault();
+        $event.stopPropagation();
+
+        $rootScope[calendar] = true;
+    };
+});
 
 //controllers
 eventplanner.controller('DetailEvenementCtrl', function($scope, reservatieSvc) {
@@ -45,6 +54,18 @@ eventplanner.controller('PeriodeCtrl', function ($scope) {
     $scope.getOverlap = function (nieuweReservatie) {
 
     };
+});
+
+eventplanner.controller('StratenCtrl', function ($scope, $http) {
+    $scope.getLocations = function (val) {
+        if (val === undefined || val.length < 2)
+            return;
+
+        return $http.get('/straten/straat?zoekstraat=' + val)
+            .then(function (response) {
+                return response.data;
+            });
+    }
 });
 
 //services

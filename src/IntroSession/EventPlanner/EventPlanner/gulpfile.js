@@ -11,7 +11,8 @@ gulp.task('copy', function() {
         "bootstrap": "bootstrap/dist/**/*.{js,map,css,ttf,svg,woff,eot}",
         "jquery": "jquery/dist/jquery*.{js,map}",
         "toastr": "toastr/toastr.*{js,css}",
-        "angular": "angular/angular.js"
+        "angular": "angular/angular.js",
+        "angularui": "angular-ui-bootstrap-bower/ui-bootstrap*.js"
     }
 
     for (var destinationDir in bower) {

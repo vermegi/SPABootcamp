@@ -42,18 +42,32 @@
     <div class="well" ng-controller="PeriodeCtrl" ng-show="nieuwePeriodeToevoegenVisibility.visible">
         <div class="form-group">
             <label>Van:</label>
-            <input type="text" class="form-control" ng-model="nieuwereservatie.beginDatumPeriode" />
+            <p class=" input-group">
+                <input type="text" class="form-control" datepicker-popup="dd-MM-yyyy" ng-model="nieuwereservatie.beginDatumPeriode" is-open="calendarVanOpened" close-text="Close"
+                       ng-click="openCalendar($event, 'calendarVanOpened')" />
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'calendarVanOpened')"><i class="glyphicon glyphicon-calendar"></i></button>
+                </span>
+            </p>
         </div>
         <div class="form-group">
             <label>Tot:</label>
-            <input type="text" class="form-control" ng-model="nieuwereservatie.eindDatumPeriode" />
+            <p class=" input-group">
+                <input type="text" class="form-control" datepicker-popup="dd-MM-yyyy" ng-model="nieuwereservatie.eindDatumPeriode" is-open="calendarTotOpened" close-text="Close"
+                       ng-click="openCalendar($event, 'calendarTotOpened')" />
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'calendarTotOpened')"><i class="glyphicon glyphicon-calendar"></i></button>
+                </span>
+            </p>
         </div>
-        <div class="form-group">
+        <div class="form-group" ng-controller="StratenCtrl">
             <p class="input-group">
-                <input class="form-control" type="text" placeholder="zoek een straat" />
+                <input class="form-control" type="text" placeholder="zoek een straat" ng-model="geselecteerdeStraat"
+                       typeahead="address as address.Straatnaam for address in getLocations($viewValue)" typeahead-loading="loadingLocations" />
                 <span class="input-group-btn">
                     <button class="btn btn-default"><i class="glyphicon glyphicon-plus"></i></button>
                 </span>
+                <i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i>
             </p>
         </div>
         <div>
