@@ -127,6 +127,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\app\eventplanner.js" />
+    <Content Include="Content\app\partials\evenement.html" />
     <Content Include="Content\app\partials\evenementlist.html" />
     <Content Include="Content\css\custom.css">
       <DependentUpon>custom.less</DependentUpon>

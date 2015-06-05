@@ -23,6 +23,10 @@ eventplanner.config(['$httpProvider', '$routeProvider', function ($httpProvider,
             templateUrl: '/Content/app/partials/evenementlist.html',
             controller: 'ReservatiesCtrl'
         })
+        .when('/evenement/:evenementId', {
+            templateUrl: '/Content/app/partials/evenement.html',
+            controller: 'ReservatieDetailCtrl'
+        })
         .otherwise({
             redirectTo: '/evenementen'
         });
@@ -55,8 +59,8 @@ eventplanner.controller('DetailEvenementCtrl', function($scope, reservatieSvc) {
         reservatieSvc.detailsEvenementOpslaan($scope.evenement);
     };
 
-    $scope.init = function (evenementId) {
-        reservatieSvc.getReservatieData(evenementId)
+    $scope.init = function () {
+        reservatieSvc.getReservatieData($scope.evenementId)
             .then(function(data) {
                 $scope.evenement = data.evenement;
                 $scope.reservatieData = data.reservatieData;
