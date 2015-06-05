@@ -44,6 +44,5 @@ namespace EventPlanner.Api
                 }).ToList();
             }
         }
-
     }
 }
