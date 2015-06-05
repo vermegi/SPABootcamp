@@ -15,7 +15,8 @@ gulp.task('copy', function() {
         "angularui": "angular-ui-bootstrap-bower/ui-bootstrap*.js",
         "smarttable": "angular-smart-table/dist/*.js",
         "moment": "moment/min/*.js*/", 
-        "angularmoment": "angular-moment/angular*.js"
+        "angularmoment": "angular-moment/angular*.js",
+        "route": "angular-route/angular-route*.js"
     }
 
     for (var destinationDir in bower) {

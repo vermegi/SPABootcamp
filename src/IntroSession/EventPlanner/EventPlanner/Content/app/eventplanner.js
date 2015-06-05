@@ -1,7 +1,7 @@
 ﻿//app stuff
-var eventplanner = angular.module("EventPlanner", ['ui.bootstrap', 'smart-table']);
+var eventplanner = angular.module("EventPlanner", ['ui.bootstrap', 'smart-table', 'ngRoute']);
 
-eventplanner.config(['$httpProvider', function ($httpProvider) {
+eventplanner.config(['$httpProvider', '$routeProvider', function ($httpProvider, $routeProvider) {
     //initialize get if not there
     if (!$httpProvider.defaults.headers.get) {
         $httpProvider.defaults.headers.get = {
@@ -17,6 +17,15 @@ eventplanner.config(['$httpProvider', function ($httpProvider) {
     // extra
     $httpProvider.defaults.headers.get['Cache-Control'] = 'no-cache';
     $httpProvider.defaults.headers.get['Pragma'] = 'no-cache';
+
+    $routeProvider
+        .when('/evenementen', {
+            templateUrl: '/Content/app/partials/evenementlist.html',
+            controller: 'ReservatiesCtrl'
+        })
+        .otherwise({
+            redirectTo: '/evenementen'
+        });
 }]);
 
 eventplanner.run(function ($rootScope) {

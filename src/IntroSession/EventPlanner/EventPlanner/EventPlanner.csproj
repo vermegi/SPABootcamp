@@ -127,6 +127,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\app\eventplanner.js" />
+    <Content Include="Content\app\partials\evenementlist.html" />
     <Content Include="Content\css\custom.css">
       <DependentUpon>custom.less</DependentUpon>
     </Content>
@@ -156,6 +157,8 @@
     <Content Include="Content\lib\moment\moment-with-locales.min.js" />
     <Content Include="Content\lib\moment\moment.min.js" />
     <Content Include="Content\lib\moment\tests.js" />
+    <Content Include="Content\lib\route\angular-route.js" />
+    <Content Include="Content\lib\route\angular-route.min.js" />
     <Content Include="Content\lib\smarttable\smart-table.js" />
     <Content Include="Content\lib\smarttable\smart-table.min.js" />
     <Content Include="Content\lib\toastr\toastr.css" />
