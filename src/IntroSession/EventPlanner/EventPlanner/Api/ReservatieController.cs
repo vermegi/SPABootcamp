@@ -11,6 +11,7 @@ namespace EventPlanner.Api
 {
     public class ReservatieController : ApiController
     {
+        [HttpGet]
         public IHttpActionResult GetReservatieData([FromUri]GetEvenementDataRequest request)
         {
             using (var ctx = new EvenementEntities())
@@ -91,6 +92,7 @@ namespace EventPlanner.Api
             return Ok();
         }
 
+        [HttpGet]
         public IHttpActionResult GetOverlap(GetOverlapRequest request)
         {
             var dagen = request.GenereerDagen();
