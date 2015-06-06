@@ -1,5 +1,10 @@
 ﻿var gulp = require('gulp'),
-    del = require('del');
+    del = require('del'),
+    concat = require('gulp-concat'),
+    jshint = require('gulp-jshint'),
+    rename = require('gulp-rename'),
+    uglify = require('gulp-uglify'),
+    annotate = require('gulp-ng-annotate');
 
 var paths = {
     bower: "./bower_components/",
@@ -25,6 +30,22 @@ gulp.task('copy', function() {
     }
 });
 
+gulp.task('appscripts', function() {
+    gulp.src('./Content/app/**/*.js')
+        .pipe(annotate())
+        .pipe(jshint())
+        .pipe(jshint.reporter('default'))
+        .pipe(concat('eventplanner.js'))
+        .pipe(gulp.dest('./Content/dist'))
+        .pipe(rename({ suffix: '.min' }))
+        .pipe(uglify())
+        .pipe(gulp.dest('./Content/dist'));
+});
+
+gulp.task('watch', function () {
+    gulp.watch('./Content/app/**/*.js', ['appscripts']);
+});
+
 gulp.task('default', ['copy'], function () {
-    // place code for your default task here
+    gulp.start('appscripts');
 });

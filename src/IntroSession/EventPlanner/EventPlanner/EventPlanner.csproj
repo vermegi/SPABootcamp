@@ -126,15 +126,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\app\eventplanner.js" />
+    <Content Include="Content\app\app.js" />
+    <Content Include="Content\app\controllers.js" />
+    <Content Include="Content\app\directives.js" />
     <Content Include="Content\app\partials\evenement.html" />
     <Content Include="Content\app\partials\evenementlist.html" />
+    <Content Include="Content\app\services.js" />
     <Content Include="Content\css\custom.css">
       <DependentUpon>custom.less</DependentUpon>
     </Content>
     <Content Include="Content\css\custom.min.css">
       <DependentUpon>custom.css</DependentUpon>
     </Content>
+    <Content Include="Content\dist\eventplanner.js" />
+    <Content Include="Content\dist\eventplanner.min.js" />
     <Content Include="Content\lib\angularmoment\angular-moment.js" />
     <Content Include="Content\lib\angularmoment\angular-moment.min.js" />
     <Content Include="Content\lib\angularui\ui-bootstrap-tpls.js" />

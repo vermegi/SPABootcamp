@@ -1,4 +1,4 @@
-﻿//app stuff
+//app stuff
 var eventplanner = angular.module("EventPlanner", ['ui.bootstrap', 'smart-table', 'ngRoute']);
 
 eventplanner.config(['$httpProvider', '$routeProvider', function ($httpProvider, $routeProvider) {
@@ -16,7 +16,7 @@ eventplanner.config(['$httpProvider', '$routeProvider', function ($httpProvider,
     $httpProvider.defaults.headers.get['If-Modified-Since'] = 'Mon, 26 Jul 1997 05:00:00 GMT';
     // extra
     $httpProvider.defaults.headers.get['Cache-Control'] = 'no-cache';
-    $httpProvider.defaults.headers.get['Pragma'] = 'no-cache';
+    $httpProvider.defaults.headers.get.Pragma = 'no-cache';
 
     $routeProvider
         .when('/evenementen', {
@@ -32,7 +32,7 @@ eventplanner.config(['$httpProvider', '$routeProvider', function ($httpProvider,
         });
 }]);
 
-eventplanner.run(function ($rootScope) {
+eventplanner.run(["$rootScope", function ($rootScope) {
     $rootScope.openCalendar = function ($event, calendar) {
         $event.preventDefault();
         $event.stopPropagation();
@@ -40,41 +40,30 @@ eventplanner.run(function ($rootScope) {
         $rootScope[calendar] = {};
         $rootScope[calendar].opened = true;
     };
-});
-
-//directives
-eventplanner.directive('evenementheader', function() {
-    return {
-        scope: {
-            evenementInfo: '=info'
-        },
-        template: '{{evenementInfo.titel}} ({{evenementInfo.eigenaar}})'
-    };
-});
-
+}]);
 //controllers
-eventplanner.controller('DetailEvenementCtrl', function($scope, reservatieSvc) {
+eventplanner.controller('DetailEvenementCtrl', ["$scope", "reservatieSvc", function ($scope, reservatieSvc) {
 
-    $scope.detailEvenementOpslaan = function() {
+    $scope.detailEvenementOpslaan = function () {
         reservatieSvc.detailsEvenementOpslaan($scope.evenement);
     };
 
     $scope.init = function () {
         reservatieSvc.getReservatieData($scope.evenementId)
-            .then(function(data) {
+            .then(function (data) {
                 $scope.evenement = data.evenement;
                 $scope.reservatieData = data.reservatieData;
             });
     };
-});
+}]);
 
-eventplanner.controller('ReservatieDetailCtrl', function($scope) {
+eventplanner.controller('ReservatieDetailCtrl', ["$scope", function ($scope) {
     $scope.nieuwePeriodeToevoegenVisibility = {
         visible: false
     };
-});
+}]);
 
-eventplanner.controller('PeriodeCtrl', function ($scope) {
+eventplanner.controller('PeriodeCtrl', ["$scope", function ($scope) {
     $scope.toegevoegdeStraten = [];
     $scope.getOverlap = function (nieuweReservatie) {
 
@@ -91,25 +80,25 @@ eventplanner.controller('PeriodeCtrl', function ($scope) {
         var index = $scope.toegevoegdeStraten.indexOf(straat);
         $scope.toegevoegdeStraten.splice(index, 1);
     };
-});
+}]);
 
-eventplanner.controller('StratenCtrl', function ($scope, $http) {
-    $scope.getLocations = function (val) {
+eventplanner.controller('StratenCtrl', ["$scope", "$http", function ($scope, $http) {
+    $scope.getLocations = function(val) {
         if (val === undefined || val.length < 2)
             return;
 
         return $http.get('/straten/straat?zoekstraat=' + val)
-            .then(function (response) {
+            .then(function(response) {
                 return response.data;
             });
-    }
+    };
 
     $scope.$on('straatGeselecteerd', function () {
         $scope.geselecteerdeStraat = '';
     });
-});
+}]);
 
-eventplanner.controller('ReservatiesCtrl', function ($scope, reservatieSvc) {
+eventplanner.controller('ReservatiesCtrl', ["$scope", "reservatieSvc", function ($scope, reservatieSvc) {
     $scope.openCalendar = function ($event, calendar) {
         $event.preventDefault();
         $event.stopPropagation();
@@ -121,7 +110,7 @@ eventplanner.controller('ReservatiesCtrl', function ($scope, reservatieSvc) {
     $scope.datumTot = moment().add(1, 'month').toJSON();
 
     $scope.callServer = function (tableState) {
-        if (tableState == undefined) {
+        if (tableState === undefined) {
             tableState = { pagination: { start: 0, number: 10 }, search: { predicateObject: { $: "" } } };
         }
 
@@ -138,45 +127,52 @@ eventplanner.controller('ReservatiesCtrl', function ($scope, reservatieSvc) {
             $scope.isLoading = false;
         });
     };
-});
+}]);
 
-
-
-//services
-eventplanner.factory('reservatieSvc', function($http, $q, notifier) {
+//directives
+eventplanner.directive('evenementheader', function () {
     return {
-        getReservatieData: function (evenementId) {
+        scope: {
+            evenementInfo: '=info'
+        },
+        template: '{{evenementInfo.titel}} ({{evenementInfo.eigenaar}})'
+    };
+});
+//services
+eventplanner.factory('reservatieSvc', ["$http", "$q", "notifier", function ($http, $q, notifier) {
+    return {
+        getReservatieData: function(evenementId) {
             var dfd = $q.defer();
             $http.get('/api/Reservatie/GetReservatieData', { params: { EvenementId: evenementId } })
                 .success(dfd.resolve)
-                .error(function () {
+                .error(function() {
                     notifier.error('something went wrong!');
                 });
             return dfd.promise;
         },
-        detailsEvenementOpslaan: function (evenement) {
+        detailsEvenementOpslaan: function(evenement) {
             $http.post("/api/Reservatie/OmschrijvingAanpassen", evenement)
                 .success(function() {
                     notifier.notify('changes saved succesfully');
                 })
-                .error(function () {
+                .error(function() {
                     notifier.error("something went wrong");
                 });
         },
-        getReservatiesData: function (datumVan, datumTot, start, number, searchTerm) {
+        getReservatiesData: function(datumVan, datumTot, start, number, searchTerm) {
             var dfd = $q.defer();
             $http.get('/api/Reservaties/GetForDate', { params: { DatumVan: datumVan, DatumTot: datumTot, Start: start, Number: number, SearchTerm: searchTerm } })
                 .success(dfd.resolve)
-                .error(function (err) {
-                notifier.error('Er is iets misgelopen');
-            });
+                .error(function(err) {
+                    notifier.error('Er is iets misgelopen');
+                });
             return dfd.promise;
         }
-    }
-});
+    };
+}]);
 
 eventplanner.value('toastr', toastr);
-eventplanner.factory('notifier', function (toastr) {
+eventplanner.factory('notifier', ["toastr", function (toastr) {
     toastr.options = {
         "closeButton": false,
         "debug": false,
@@ -195,11 +191,11 @@ eventplanner.factory('notifier', function (toastr) {
         "hideMethod": "fadeOut"
     };
     return {
-        notify: function (msg) {
-            toastr["success"](msg, "");
+        notify: function(msg) {
+            toastr.success(msg, "");
         },
-        error: function (msg) {
-            toastr["error"](msg, "");
+        error: function(msg) {
+            toastr.error(msg, "");
         }
-    }
-});
+    };
+}]);
