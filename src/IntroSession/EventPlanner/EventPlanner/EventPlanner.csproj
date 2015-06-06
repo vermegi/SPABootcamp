@@ -171,6 +171,7 @@
     <Content Include="Content\lib\toastr\toastr.js" />
     <Content Include="Content\lib\toastr\toastr.min.css" />
     <Content Include="Content\lib\toastr\toastr.min.js" />
+    <Content Include="Content\test\Given_the_PeriodeCtrl.js" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="gulpfile.js" />

@@ -30,7 +30,7 @@ eventplanner.controller('PeriodeCtrl', function ($scope) {
         if (geselecteerdeStraat === undefined || geselecteerdeStraat.Id === undefined)
             return;
         $scope.toegevoegdeStraten.push(geselecteerdeStraat);
-        $scope.$broadcast('straatGeselecteerd');
+        //$scope.$broadcast('straatGeselecteerd');
     };
 
     $scope.straatVerwijderen = function (straat) {
