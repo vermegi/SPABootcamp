@@ -140,6 +140,7 @@
     </Content>
     <Content Include="Content\dist\eventplanner.js" />
     <Content Include="Content\dist\eventplanner.min.js" />
+    <Content Include="Content\lib\angularmocks\angular-mocks.js" />
     <Content Include="Content\lib\angularmoment\angular-moment.js" />
     <Content Include="Content\lib\angularmoment\angular-moment.min.js" />
     <Content Include="Content\lib\angularui\ui-bootstrap-tpls.js" />
@@ -230,6 +231,9 @@
     <Content Include="Content\css\custom.less" />
     <Content Include="Content\css\custom.css.map">
       <DependentUpon>custom.css</DependentUpon>
+    </Content>
+    <Content Include="Content\dist\eventplanner.min.js.map">
+      <DependentUpon>eventplanner.min.js</DependentUpon>
     </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
