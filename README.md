@@ -29,3 +29,5 @@ gulp
 Make sure you have a c:\temp directory on your system and IISExpress is installed. 
 
 This should do it. You can now open and run the eventplanner.sln solution. 
+
+If you get an error that says "Unable to load DLL 'SQLite.Interop.dll': The specified module could not be found.": clean solution and rebuild.
